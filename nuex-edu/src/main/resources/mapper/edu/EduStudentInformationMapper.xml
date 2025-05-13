@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduStudentInformationMapper">
+    
+    <resultMap type="EduStudentInformation" id="EduStudentInformationResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="studentNo"    column="student_no"    />
+        <result property="phoneNumber"    column="phone_number"    />
+        <result property="email"    column="email"    />
+        <result property="studentAnalyze"    column="student_analyze"    />
+    </resultMap>
+
+    <sql id="selectEduStudentInformationVo">
+        select id, name, sex, age, student_no, phone_number, email, student_analyze from edu_student_information
+    </sql>
+
+    <select id="selectEduStudentInformationList" parameterType="EduStudentInformation" resultMap="EduStudentInformationResult">
+        <include refid="selectEduStudentInformationVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="age != null "> and age = #{age}</if>
+            <if test="phoneNumber != null "> and phone_number = #{phoneNumber}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="studentAnalyze != null  and studentAnalyze != ''"> and student_analyze = #{studentAnalyze}</if>
+        </where>
+    </select>
+    
+    <select id="selectEduStudentInformationById" parameterType="Long" resultMap="EduStudentInformationResult">
+        <include refid="selectEduStudentInformationVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEduStudentInformation" parameterType="EduStudentInformation" useGeneratedKeys="true" keyProperty="id">
+        insert into edu_student_information
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="sex != null">sex,</if>
+            <if test="age != null">age,</if>
+            <if test="studentNo != null">student_no,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="email != null">email,</if>
+            <if test="studentAnalyze != null">student_analyze,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="age != null">#{age},</if>
+            <if test="studentNo != null">#{studentNo},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="email != null">#{email},</if>
+            <if test="studentAnalyze != null">#{studentAnalyze},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduStudentInformation" parameterType="EduStudentInformation">
+        update edu_student_information
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="studentNo != null">student_no = #{studentNo},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="studentAnalyze != null">student_analyze = #{studentAnalyze},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEduStudentInformationById" parameterType="Long">
+        delete from edu_student_information where id = #{id}
+    </delete>
+
+    <delete id="deleteEduStudentInformationByIds" parameterType="String">
+        delete from edu_student_information where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

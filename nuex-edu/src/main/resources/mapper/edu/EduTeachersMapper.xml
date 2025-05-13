@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduTeachersMapper">
+
+    <resultMap type="EduTeachers" id="EduTeachersResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="description"    column="description"    />
+        <result property="position"    column="position"    />
+
+    </resultMap>
+
+    <sql id="selectEduTeachersVo">
+        select id, name, description, position from edu_teachers
+    </sql>
+
+    <select id="selectEduTeachersList" parameterType="EduTeachers" resultMap="EduTeachersResult">
+        <include refid="selectEduTeachersVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectEduTeachersById" parameterType="Long" resultMap="EduTeachersResult">
+        <include refid="selectEduTeachersVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEduTeachers" parameterType="EduTeachers" useGeneratedKeys="true" keyProperty="id">
+        insert into edu_teachers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="description != null">description,</if>
+            <if test="position != null">position,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="description != null">#{description},</if>
+            <if test="position != null">#{position},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduTeachers" parameterType="EduTeachers">
+        update edu_teachers
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="position != null">position = #{position},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEduTeachersById" parameterType="Long">
+        delete from edu_teachers where id = #{id}
+    </delete>
+
+    <delete id="deleteEduTeachersByIds" parameterType="String">
+        delete from edu_teachers where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

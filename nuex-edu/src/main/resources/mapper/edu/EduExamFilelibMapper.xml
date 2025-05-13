@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduExamFilelibMapper">
+
+    <resultMap type="EduExamFilelib" id="EduExamFilelibResult">
+        <result property="id"    column="id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="name"    column="name"    />
+        <result property="coursesName"    column="courses_name"    />
+        <result property="courseChapterId"    column="course_chapter_id"    />
+        <result property="coursesChapter"    column="courses_chapter"    />
+        <result property="subPath"    column="sub_path"    />
+        <result property="correctPath"    column="correct_path"    />
+        <result property="coursesId"    column="courses_id"    />
+        <result property="coursesExamName"    column="courses_exam_name"    />
+        <result property="score"    column="score"    />
+    </resultMap>
+
+    <sql id="selectEduExamFilelibVo">
+        select id, student_id, name, courses_name, course_chapter_id, courses_chapter, sub_path, correct_path, courses_id, courses_exam_name, score from edu_exam_filelib
+    </sql>
+
+    <select id="selectEduExamFilelibList" parameterType="EduExamFilelib" resultMap="EduExamFilelibResult">
+        <include refid="selectEduExamFilelibVo"/>
+        <where>
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="coursesName != null  and coursesName != ''"> and courses_name like concat('%', #{coursesName}, '%')</if>
+            <if test="courseChapterId != null "> and course_chapter_id = #{courseChapterId}</if>
+            <if test="coursesChapter != null  and coursesChapter != ''"> and courses_chapter = #{coursesChapter}</if>
+            <if test="subPath != null  and subPath != ''"> and sub_path = #{subPath}</if>
+            <if test="correctPath != null  and correctPath != ''"> and correct_path = #{correctPath}</if>
+            <if test="coursesId != null "> and courses_id = #{coursesId}</if>
+            <if test="coursesExamName != null  and coursesExamName != ''"> and courses_exam_name = #{coursesExamName}</if>
+            <if test="score != null and score != '' "> and score = #{score}</if>
+        </where>
+    </select>
+
+    <select id="selectEduExamFilelibById" parameterType="Long" resultMap="EduExamFilelibResult">
+        <include refid="selectEduExamFilelibVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEduExamFilelib" parameterType="EduExamFilelib" useGeneratedKeys="true" keyProperty="id">
+        insert into edu_exam_filelib
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_id,</if>
+            <if test="name != null">name,</if>
+            <if test="coursesName != null">courses_name,</if>
+            <if test="courseChapterId != null">course_chapter_id,</if>
+            <if test="coursesChapter != null">courses_chapter,</if>
+            <if test="subPath != null">sub_path,</if>
+            <if test="correctPath != null">correct_path,</if>
+            <if test="coursesId != null">courses_id,</if>
+            <if test="coursesExamName != null">courses_exam_name,</if>
+            <if test="score != null">score,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="coursesName != null">#{coursesName},</if>
+            <if test="courseChapterId != null">#{courseChapterId},</if>
+            <if test="coursesChapter != null">#{coursesChapter},</if>
+            <if test="subPath != null">#{subPath},</if>
+            <if test="correctPath != null">#{correctPath},</if>
+            <if test="coursesId != null">#{coursesId},</if>
+            <if test="coursesExamName != null">#{coursesExamName},</if>
+            <if test="score != null">#{score},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduExamFilelib" parameterType="EduExamFilelib">
+        update edu_exam_filelib
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="coursesName != null">courses_name = #{coursesName},</if>
+            <if test="courseChapterId != null">course_chapter_id = #{courseChapterId},</if>
+            <if test="coursesChapter != null">courses_chapter = #{coursesChapter},</if>
+            <if test="subPath != null">sub_path = #{subPath},</if>
+            <if test="correctPath != null">correct_path = #{correctPath},</if>
+            <if test="coursesId != null">courses_id = #{coursesId},</if>
+            <if test="coursesExamName != null">courses_exam_name = #{coursesExamName},</if>
+            <if test="score != null">score = #{score},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEduExamFilelibById" parameterType="Long">
+        delete from edu_exam_filelib where id = #{id}
+    </delete>
+
+    <delete id="deleteEduExamFilelibByIds" parameterType="String">
+        delete from edu_exam_filelib where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
