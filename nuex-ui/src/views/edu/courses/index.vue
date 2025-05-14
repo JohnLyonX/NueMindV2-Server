@@ -144,20 +144,47 @@
           </el-select>
         </el-form-item>
         <el-divider content-position="center">视频课信息</el-divider>
+        <el-alert v-if="title === '添加课程'" type="warning" show-icon :closable="false">
+          添加课程后，在课程章节信息页面添加章节后返回此页面点击修改才可以添加视频
+        </el-alert>
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
-            <el-button type="primary" icon="el-icon-plus" size="mini" @click="handleAddEduCoursesDetails">添加</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-plus"
+              size="mini"
+              @click="handleAddEduCoursesDetails"
+              :disabled="title === '添加课程'"
+            >添加</el-button>
           </el-col>
           <el-col :span="1.5">
-            <el-button type="danger" icon="el-icon-delete" size="mini" @click="handleDeleteEduCoursesDetails">删除</el-button>
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              size="mini"
+              @click="handleDeleteEduCoursesDetails"
+              :disabled="title === '添加课程'"
+            >删除</el-button>
           </el-col>
         </el-row>
-        <el-table :data="eduCoursesDetailsList" :row-class-name="rowEduCoursesDetailsIndex" @selection-change="handleEduCoursesDetailsSelectionChange" ref="eduCoursesDetails">
+        <el-table :data="eduCoursesDetailsList" :row-class-name="rowEduCoursesDetailsIndex" @selection-change="handleEduCoursesDetailsSelectionChange" ref="eduCoursesDetails" :disabled="isAddingNewCourse">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="序号" align="center" prop="index" width="50"/>
-          <el-table-column label="课程章节标名称" prop="coursesChapterName" width="150" >
+          <el-table-column label="课程章节标名称" prop="coursesChapterId" width="150" >
             <template slot-scope="scope">
-              <el-input v-model="scope.row.coursesChapterName" placeholder="请输入课程章节标名称" />
+              <el-select
+                v-model="scope.row.coursesChapterId"
+                placeholder="请选择课程章节"
+                clearable
+                @change="handleChapterChange(scope.row, $event)"
+              >
+                <el-option
+                  v-for="chapter in filteredChaptersList"
+                  :key="chapter.id"
+                  :label="chapter.title"
+                  :value="chapter.id"
+                />
+              </el-select>
             </template>
           </el-table-column>
           <el-table-column label="视频课标题" prop="title" width="150">
@@ -182,7 +209,7 @@
 
 <script>
 import { listCourses, getCourses, delCourses, addCourses, updateCourses } from "@/api/edu/courses";
-
+import { listCoursesChapter } from "@/api/edu/coursesChapter";
 export default {
   name: "Courses",
   dicts: ['course_status'],
@@ -204,6 +231,9 @@ export default {
       total: 0,
       // 课程表格数据
       coursesList: [],
+      chaptersList: [],
+      filteredChaptersList: [],
+      isAddingNewCourse: false,
       // 视频课表格数据
       eduCoursesDetailsList: [],
       // 弹出层标题
@@ -230,6 +260,7 @@ export default {
   },
   created() {
     this.getList();
+    this.getChaptersList();
   },
   methods: {
     /** 查询课程列表 */
@@ -240,6 +271,17 @@ export default {
         this.total = response.total;
         this.loading = false;
       });
+    },
+    getChaptersList() {
+      listCoursesChapter().then(response => {
+        this.chaptersList = response.data;
+      });
+    },
+    handleChapterChange(row, chapterId) {
+      const selectedChapter = this.chaptersList.find(chapter => chapter.id === chapterId);
+      if (selectedChapter) {
+        row.coursesChapterName = selectedChapter.title; // Update the name if needed
+      }
     },
     // 取消按钮
     cancel() {
@@ -281,16 +323,45 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset();
+      this.filteredChaptersList = [];
+      this.isAddingNewCourse = true;
       this.open = true;
       this.title = "添加课程";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const id = row.id || this.ids
+      this.isAddingNewCourse = false;
+      const id = row.id || this.ids;
       getCourses(id).then(response => {
         this.form = response.data;
-        this.eduCoursesDetailsList = response.data.eduCoursesDetailsList;
+
+        // 过滤章节列表，只显示当前课程的章节
+        const currentCourseId = response.data.id;
+        const filteredChapters = this.chaptersList.filter(chapter =>
+          chapter.coursesId === currentCourseId &&
+          chapter.parentId !== 0 // 排除父章节
+        );
+
+        // 获取所有父章节ID
+        const parentChapterIds = this.chaptersList
+          .filter(chapter => chapter.parentId === 0 && chapter.coursesId === currentCourseId)
+          .map(chapter => chapter.id);
+
+        // 进一步过滤掉子章节中的父章节（即章节的parentId是某个父章节的ID）
+        const finalFilteredChapters = filteredChapters.filter(chapter =>
+          !parentChapterIds.includes(chapter.parentId)
+        );
+
+        this.eduCoursesDetailsList = response.data.eduCoursesDetailsList.map(item => {
+          return {
+            ...item,
+            coursesChapterId: item.coursesChapterId || null
+          };
+        });
+
+        // 使用过滤后的章节列表
+        this.filteredChaptersList = finalFilteredChapters;
         this.open = true;
         this.title = "修改课程";
       });
@@ -332,14 +403,22 @@ export default {
     },
     /** 视频课添加按钮操作 */
     handleAddEduCoursesDetails() {
+      if (this.title === '添加课程') {
+        this.$modal.msgWarning("请先添加课程并在课程章节信息页面添加章节后，才能添加视频课");
+        return;
+      }
       let obj = {};
-      obj.coursesChapterId = "";
+      obj.coursesChapterId = 0;
       obj.title = "";
       obj.videoUrl = "";
       this.eduCoursesDetailsList.push(obj);
     },
     /** 视频课删除按钮操作 */
     handleDeleteEduCoursesDetails() {
+      if (this.title === '添加课程') {
+        this.$modal.msgWarning("请先添加课程并在课程章节信息页面添加章节后，才能管理视频课");
+        return;
+      }
       if (this.checkedEduCoursesDetails.length == 0) {
         this.$modal.msgError("请先选择要删除的视频课数据");
       } else {
