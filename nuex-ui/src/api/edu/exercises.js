@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询课程考试列表
+// 查询练习集合列表
 export function listExercises(query) {
   return request({
     url: '/edu/exercises/list',
@@ -9,15 +9,15 @@ export function listExercises(query) {
   })
 }
 
-// 查询课程考试详细
-export function getExercises(id) {
+// 查询练习集合详细
+export function getExercises(exerciseId) {
   return request({
-    url: '/edu/exercises/' + id,
+    url: '/edu/exercises/' + exerciseId,
     method: 'get'
   })
 }
 
-// 新增课程考试
+// 新增练习集合
 export function addExercises(data) {
   return request({
     url: '/edu/exercises',
@@ -26,7 +26,7 @@ export function addExercises(data) {
   })
 }
 
-// 修改课程考试
+// 修改练习集合
 export function updateExercises(data) {
   return request({
     url: '/edu/exercises',
@@ -35,10 +35,10 @@ export function updateExercises(data) {
   })
 }
 
-// 删除课程考试
-export function delExercises(id) {
+// 删除练习集合
+export function delExercises(exerciseId) {
   return request({
-    url: '/edu/exercises/' + id,
+    url: '/edu/exercises/' + exerciseId,
     method: 'delete'
   })
 }
