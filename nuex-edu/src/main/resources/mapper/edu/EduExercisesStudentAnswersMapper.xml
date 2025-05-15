@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduExercisesStudentAnswersMapper">
+    
+    <resultMap type="EduExercisesStudentAnswers" id="EduExercisesStudentAnswersResult">
+        <result property="answerId"    column="answer_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="exerciseId"    column="exercise_id"    />
+        <result property="questionId"    column="question_id"    />
+        <result property="selectedAnswer"    column="selected_answer"    />
+        <result property="isCorrect"    column="is_correct"    />
+        <result property="answerTime"    column="answer_time"    />
+    </resultMap>
+
+    <sql id="selectEduExercisesStudentAnswersVo">
+        select answer_id, student_id, exercise_id, question_id, selected_answer, is_correct, answer_time from edu_exercises_student_answers
+    </sql>
+
+    <select id="selectEduExercisesStudentAnswersList" parameterType="EduExercisesStudentAnswers" resultMap="EduExercisesStudentAnswersResult">
+        <include refid="selectEduExercisesStudentAnswersVo"/>
+        <where>  
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="exerciseId != null "> and exercise_id = #{exerciseId}</if>
+            <if test="questionId != null "> and question_id = #{questionId}</if>
+            <if test="selectedAnswer != null  and selectedAnswer != ''"> and selected_answer = #{selectedAnswer}</if>
+            <if test="isCorrect != null "> and is_correct = #{isCorrect}</if>
+            <if test="answerTime != null "> and answer_time = #{answerTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectEduExercisesStudentAnswersByAnswerId" parameterType="Long" resultMap="EduExercisesStudentAnswersResult">
+        <include refid="selectEduExercisesStudentAnswersVo"/>
+        where answer_id = #{answerId}
+    </select>
+
+    <insert id="insertEduExercisesStudentAnswers" parameterType="EduExercisesStudentAnswers" useGeneratedKeys="true" keyProperty="answerId">
+        insert into edu_exercises_student_answers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_id,</if>
+            <if test="exerciseId != null">exercise_id,</if>
+            <if test="questionId != null">question_id,</if>
+            <if test="selectedAnswer != null">selected_answer,</if>
+            <if test="isCorrect != null">is_correct,</if>
+            <if test="answerTime != null">answer_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="exerciseId != null">#{exerciseId},</if>
+            <if test="questionId != null">#{questionId},</if>
+            <if test="selectedAnswer != null">#{selectedAnswer},</if>
+            <if test="isCorrect != null">#{isCorrect},</if>
+            <if test="answerTime != null">#{answerTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduExercisesStudentAnswers" parameterType="EduExercisesStudentAnswers">
+        update edu_exercises_student_answers
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="exerciseId != null">exercise_id = #{exerciseId},</if>
+            <if test="questionId != null">question_id = #{questionId},</if>
+            <if test="selectedAnswer != null">selected_answer = #{selectedAnswer},</if>
+            <if test="isCorrect != null">is_correct = #{isCorrect},</if>
+            <if test="answerTime != null">answer_time = #{answerTime},</if>
+        </trim>
+        where answer_id = #{answerId}
+    </update>
+
+    <delete id="deleteEduExercisesStudentAnswersByAnswerId" parameterType="Long">
+        delete from edu_exercises_student_answers where answer_id = #{answerId}
+    </delete>
+
+    <delete id="deleteEduExercisesStudentAnswersByAnswerIds" parameterType="String">
+        delete from edu_exercises_student_answers where answer_id in 
+        <foreach item="answerId" collection="array" open="(" separator="," close=")">
+            #{answerId}
+        </foreach>
+    </delete>
+</mapper>

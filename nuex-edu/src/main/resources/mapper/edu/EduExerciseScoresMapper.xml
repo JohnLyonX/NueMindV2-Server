@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduExerciseScoresMapper">
+    
+    <resultMap type="EduExerciseScores" id="EduExerciseScoresResult">
+        <result property="scoreId"    column="score_id"    />
+        <result property="studentId"    column="student_id"    />
+        <result property="exerciseId"    column="exercise_id"    />
+        <result property="totalScore"    column="total_score"    />
+        <result property="maxScore"    column="max_score"    />
+        <result property="completionTime"    column="completion_time"    />
+    </resultMap>
+
+    <sql id="selectEduExerciseScoresVo">
+        select score_id, student_id, exercise_id, total_score, max_score, completion_time from edu_exercise_scores
+    </sql>
+
+    <select id="selectEduExerciseScoresList" parameterType="EduExerciseScores" resultMap="EduExerciseScoresResult">
+        <include refid="selectEduExerciseScoresVo"/>
+        <where>  
+            <if test="studentId != null "> and student_id = #{studentId}</if>
+            <if test="exerciseId != null "> and exercise_id = #{exerciseId}</if>
+            <if test="totalScore != null "> and total_score = #{totalScore}</if>
+            <if test="maxScore != null "> and max_score = #{maxScore}</if>
+            <if test="completionTime != null "> and completion_time = #{completionTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectEduExerciseScoresByScoreId" parameterType="Long" resultMap="EduExerciseScoresResult">
+        <include refid="selectEduExerciseScoresVo"/>
+        where score_id = #{scoreId}
+    </select>
+
+    <insert id="insertEduExerciseScores" parameterType="EduExerciseScores" useGeneratedKeys="true" keyProperty="scoreId">
+        insert into edu_exercise_scores
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">student_id,</if>
+            <if test="exerciseId != null">exercise_id,</if>
+            <if test="totalScore != null">total_score,</if>
+            <if test="maxScore != null">max_score,</if>
+            <if test="completionTime != null">completion_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">#{studentId},</if>
+            <if test="exerciseId != null">#{exerciseId},</if>
+            <if test="totalScore != null">#{totalScore},</if>
+            <if test="maxScore != null">#{maxScore},</if>
+            <if test="completionTime != null">#{completionTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduExerciseScores" parameterType="EduExerciseScores">
+        update edu_exercise_scores
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">student_id = #{studentId},</if>
+            <if test="exerciseId != null">exercise_id = #{exerciseId},</if>
+            <if test="totalScore != null">total_score = #{totalScore},</if>
+            <if test="maxScore != null">max_score = #{maxScore},</if>
+            <if test="completionTime != null">completion_time = #{completionTime},</if>
+        </trim>
+        where score_id = #{scoreId}
+    </update>
+
+    <delete id="deleteEduExerciseScoresByScoreId" parameterType="Long">
+        delete from edu_exercise_scores where score_id = #{scoreId}
+    </delete>
+
+    <delete id="deleteEduExerciseScoresByScoreIds" parameterType="String">
+        delete from edu_exercise_scores where score_id in 
+        <foreach item="scoreId" collection="array" open="(" separator="," close=")">
+            #{scoreId}
+        </foreach>
+    </delete>
+</mapper>

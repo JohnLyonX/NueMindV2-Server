@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nuex.edu.mapper.EduExercisesMapper">
+    
+    <resultMap type="EduExercises" id="EduExercisesResult">
+        <result property="exerciseId"    column="exercise_id"    />
+        <result property="title"    column="title"    />
+        <result property="description"    column="description"    />
+        <result property="userId"    column="user_id"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="submissionTime"    column="submission_time"    />
+        <result property="timeLimit"    column="time_limit"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectEduExercisesVo">
+        select exercise_id, title, description, user_id, created_at, submission_time, time_limit, status from edu_exercises
+    </sql>
+
+    <select id="selectEduExercisesList" parameterType="EduExercises" resultMap="EduExercisesResult">
+        <include refid="selectEduExercisesVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="createdAt != null "> and created_at = #{createdAt}</if>
+            <if test="submissionTime != null "> and submission_time = #{submissionTime}</if>
+            <if test="timeLimit != null "> and time_limit = #{timeLimit}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectEduExercisesByExerciseId" parameterType="Long" resultMap="EduExercisesResult">
+        <include refid="selectEduExercisesVo"/>
+        where exercise_id = #{exerciseId}
+    </select>
+
+    <insert id="insertEduExercises" parameterType="EduExercises" useGeneratedKeys="true" keyProperty="exerciseId">
+        insert into edu_exercises
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="description != null">description,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="submissionTime != null">submission_time,</if>
+            <if test="timeLimit != null">time_limit,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="description != null">#{description},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="submissionTime != null">#{submissionTime},</if>
+            <if test="timeLimit != null">#{timeLimit},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEduExercises" parameterType="EduExercises">
+        update edu_exercises
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="submissionTime != null">submission_time = #{submissionTime},</if>
+            <if test="timeLimit != null">time_limit = #{timeLimit},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where exercise_id = #{exerciseId}
+    </update>
+
+    <delete id="deleteEduExercisesByExerciseId" parameterType="Long">
+        delete from edu_exercises where exercise_id = #{exerciseId}
+    </delete>
+
+    <delete id="deleteEduExercisesByExerciseIds" parameterType="String">
+        delete from edu_exercises where exercise_id in 
+        <foreach item="exerciseId" collection="array" open="(" separator="," close=")">
+            #{exerciseId}
+        </foreach>
+    </delete>
+</mapper>
