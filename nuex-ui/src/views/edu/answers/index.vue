@@ -1,34 +1,34 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="studentId">
+      <el-form-item label="学生 ID" prop="studentId">
         <el-input
           v-model="queryParams.studentId"
-          placeholder="请输入${comment}"
+          placeholder="请输入学生 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="exerciseId">
+      <el-form-item label="练习 ID" prop="exerciseId">
         <el-input
           v-model="queryParams.exerciseId"
-          placeholder="请输入${comment}"
+          placeholder="请输入练习 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="questionId">
+      <el-form-item label="问题 ID" prop="questionId">
         <el-input
           v-model="queryParams.questionId"
-          placeholder="请输入${comment}"
+          placeholder="请输入问题 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="selectedAnswer">
+      <el-form-item label="所选答案" prop="selectedAnswer">
         <el-input
           v-model="queryParams.selectedAnswer"
-          placeholder="请输入${comment}"
+          placeholder="请输入所选答案"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -41,12 +41,12 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="answerTime">
+      <el-form-item label="回答时间" prop="answerTime">
         <el-date-picker clearable
           v-model="queryParams.answerTime"
           type="date"
           value-format="yyyy-MM-dd"
-          placeholder="请选择${comment}">
+          placeholder="请选择回答时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -103,13 +103,13 @@
 
     <el-table v-loading="loading" :data="answersList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="answerId" />
-      <el-table-column label="${comment}" align="center" prop="studentId" />
-      <el-table-column label="${comment}" align="center" prop="exerciseId" />
-      <el-table-column label="${comment}" align="center" prop="questionId" />
-      <el-table-column label="${comment}" align="center" prop="selectedAnswer" />
+      <el-table-column label="答案编号" align="center" prop="answerId" />
+      <el-table-column label="学生 ID" align="center" prop="studentId" />
+      <el-table-column label="练习 ID" align="center" prop="exerciseId" />
+      <el-table-column label="问题 ID" align="center" prop="questionId" />
+      <el-table-column label="所选答案" align="center" prop="selectedAnswer" />
       <el-table-column label="是否答对" align="center" prop="isCorrect" />
-      <el-table-column label="${comment}" align="center" prop="answerTime" width="180">
+      <el-table-column label="回答时间" align="center" prop="answerTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.answerTime, '{y}-{m}-{d}') }}</span>
         </template>
@@ -133,7 +133,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -145,27 +145,27 @@
     <!-- 添加或修改学生提交答案表对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="studentId">
-          <el-input v-model="form.studentId" placeholder="请输入${comment}" />
+        <el-form-item label="学生 ID" prop="studentId">
+          <el-input v-model="form.studentId" placeholder="请输入学生 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="exerciseId">
-          <el-input v-model="form.exerciseId" placeholder="请输入${comment}" />
+        <el-form-item label="练习 ID" prop="exerciseId">
+          <el-input v-model="form.exerciseId" placeholder="请输入练习 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="questionId">
-          <el-input v-model="form.questionId" placeholder="请输入${comment}" />
+        <el-form-item label="问题 ID" prop="questionId">
+          <el-input v-model="form.questionId" placeholder="请输入问题 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="selectedAnswer">
-          <el-input v-model="form.selectedAnswer" placeholder="请输入${comment}" />
+        <el-form-item label="所选答案" prop="selectedAnswer">
+          <el-input v-model="form.selectedAnswer" placeholder="请输入所选答案" />
         </el-form-item>
         <el-form-item label="是否答对" prop="isCorrect">
           <el-input v-model="form.isCorrect" placeholder="请输入是否答对" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="answerTime">
+        <el-form-item label="回答时间" prop="answerTime">
           <el-date-picker clearable
             v-model="form.answerTime"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="请选择${comment}">
+            placeholder="请选择回答时间">
           </el-date-picker>
         </el-form-item>
       </el-form>

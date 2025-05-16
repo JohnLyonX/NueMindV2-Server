@@ -1,18 +1,18 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="exerciseId">
+      <el-form-item label="练习 ID" prop="exerciseId">
         <el-input
           v-model="queryParams.exerciseId"
-          placeholder="请输入${comment}"
+          placeholder="请输入练习 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="questionId">
+      <el-form-item label="问题 ID" prop="questionId">
         <el-input
           v-model="queryParams.questionId"
-          placeholder="请输入${comment}"
+          placeholder="请输入问题 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -87,9 +87,9 @@
 
     <el-table v-loading="loading" :data="correlationList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="id" />
-      <el-table-column label="${comment}" align="center" prop="exerciseId" />
-      <el-table-column label="${comment}" align="center" prop="questionId" />
+      <el-table-column label="关联 ID" align="center" prop="id" />
+      <el-table-column label="练习 ID" align="center" prop="exerciseId" />
+      <el-table-column label="问题 ID" align="center" prop="questionId" />
       <el-table-column label="题目在练习中的顺序" align="center" prop="questionOrder" />
       <el-table-column label="本题分值" align="center" prop="score" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
@@ -111,7 +111,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -123,11 +123,11 @@
     <!-- 添加或修改练习题目关联表对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="exerciseId">
-          <el-input v-model="form.exerciseId" placeholder="请输入${comment}" />
+        <el-form-item label="练习 ID" prop="exerciseId">
+          <el-input v-model="form.exerciseId" placeholder="请输入练习 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="questionId">
-          <el-input v-model="form.questionId" placeholder="请输入${comment}" />
+        <el-form-item label="问题 ID" prop="questionId">
+          <el-input v-model="form.questionId" placeholder="请输入问题 ID" />
         </el-form-item>
         <el-form-item label="题目在练习中的顺序" prop="questionOrder">
           <el-input v-model="form.questionOrder" placeholder="请输入题目在练习中的顺序" />

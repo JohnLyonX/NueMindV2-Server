@@ -1,44 +1,44 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="${comment}" prop="studentId">
+      <el-form-item label="学生 ID" prop="studentId">
         <el-input
           v-model="queryParams.studentId"
-          placeholder="请输入${comment}"
+          placeholder="请输入学生 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="exerciseId">
+      <el-form-item label="练习 ID" prop="exerciseId">
         <el-input
           v-model="queryParams.exerciseId"
-          placeholder="请输入${comment}"
+          placeholder="请输入练习 ID"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="totalScore">
+      <el-form-item label="得分" prop="totalScore">
         <el-input
           v-model="queryParams.totalScore"
-          placeholder="请输入${comment}"
+          placeholder="请输入得分"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="maxScore">
+      <el-form-item label="最高分数" prop="maxScore">
         <el-input
           v-model="queryParams.maxScore"
-          placeholder="请输入${comment}"
+          placeholder="请输入最高分数"
           clearable
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="${comment}" prop="completionTime">
+      <el-form-item label="完成时间" prop="completionTime">
         <el-date-picker clearable
           v-model="queryParams.completionTime"
           type="date"
           value-format="yyyy-MM-dd"
-          placeholder="请选择${comment}">
+          placeholder="请选择完成时间">
         </el-date-picker>
       </el-form-item>
       <el-form-item>
@@ -95,12 +95,12 @@
 
     <el-table v-loading="loading" :data="scoresList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="${comment}" align="center" prop="scoreId" />
-      <el-table-column label="${comment}" align="center" prop="studentId" />
-      <el-table-column label="${comment}" align="center" prop="exerciseId" />
-      <el-table-column label="${comment}" align="center" prop="totalScore" />
-      <el-table-column label="${comment}" align="center" prop="maxScore" />
-      <el-table-column label="${comment}" align="center" prop="completionTime" width="180">
+      <el-table-column label="得分表 ID" align="center" prop="scoreId" />
+      <el-table-column label="学生 ID" align="center" prop="studentId" />
+      <el-table-column label="练习 ID" align="center" prop="exerciseId" />
+      <el-table-column label="得分" align="center" prop="totalScore" />
+      <el-table-column label="最高分数" align="center" prop="maxScore" />
+      <el-table-column label="完成时间" align="center" prop="completionTime" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.completionTime, '{y}-{m}-{d}') }}</span>
         </template>
@@ -124,7 +124,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -136,24 +136,24 @@
     <!-- 添加或修改成绩表对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="${comment}" prop="studentId">
-          <el-input v-model="form.studentId" placeholder="请输入${comment}" />
+        <el-form-item label="学生 ID" prop="studentId">
+          <el-input v-model="form.studentId" placeholder="请输入学生 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="exerciseId">
-          <el-input v-model="form.exerciseId" placeholder="请输入${comment}" />
+        <el-form-item label="练习 ID" prop="exerciseId">
+          <el-input v-model="form.exerciseId" placeholder="请输入练习 ID" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="totalScore">
-          <el-input v-model="form.totalScore" placeholder="请输入${comment}" />
+        <el-form-item label="得分" prop="totalScore">
+          <el-input v-model="form.totalScore" placeholder="请输入得分" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="maxScore">
-          <el-input v-model="form.maxScore" placeholder="请输入${comment}" />
+        <el-form-item label="最高分数" prop="maxScore">
+          <el-input v-model="form.maxScore" placeholder="请输入最高分数" />
         </el-form-item>
-        <el-form-item label="${comment}" prop="completionTime">
+        <el-form-item label="完成时间" prop="completionTime">
           <el-date-picker clearable
             v-model="form.completionTime"
             type="date"
             value-format="yyyy-MM-dd"
-            placeholder="请选择${comment}">
+            placeholder="请选择完成时间">
           </el-date-picker>
         </el-form-item>
       </el-form>
