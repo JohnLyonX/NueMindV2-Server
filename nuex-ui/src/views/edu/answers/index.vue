@@ -218,13 +218,13 @@ export default {
       // 表单校验
       rules: {
         studentId: [
-          { required: true, message: "$comment不能为空", trigger: "blur" }
+          { required: true, message: "学生 ID不能为空", trigger: "blur" }
         ],
         exerciseId: [
-          { required: true, message: "$comment不能为空", trigger: "blur" }
+          { required: true, message: "练习 ID不能为空", trigger: "blur" }
         ],
         questionId: [
-          { required: true, message: "$comment不能为空", trigger: "blur" }
+          { required: true, message: "问题 ID不能为空", trigger: "blur" }
         ],
       }
     };

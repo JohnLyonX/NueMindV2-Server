@@ -87,6 +87,17 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
+  },
+  {
+    path: '/edu/correlation',
+    component: () => import('@/views/edu/correlation/index'),
+    name: 'Correlation',
+    meta: {
+      title: '练习关联管理',
+      icon: 'el-icon-link',
+      // 如果使用权限控制需添加：
+      // roles: ['edu:correlation:list']
+    }
   }
 ]
 

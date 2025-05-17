@@ -124,7 +124,7 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="练习 ID" prop="exerciseId">
-          <el-input v-model="form.exerciseId" placeholder="请输入练习 ID" />
+          <el-input v-model="form.exerciseId" placeholder="请输入练习 ID" :disabled="!!$route.query.exerciseId"/>
         </el-form-item>
         <el-form-item label="问题 ID" prop="questionId">
           <el-input v-model="form.questionId" placeholder="请输入问题 ID" />
@@ -173,7 +173,7 @@ export default {
       queryParams: {
         pageNum: 1,
         pageSize: 10,
-        exerciseId: null,
+        exerciseId: this.$route.query.exerciseId || null,
         questionId: null,
         questionOrder: null,
         score: null
@@ -183,10 +183,10 @@ export default {
       // 表单校验
       rules: {
         exerciseId: [
-          { required: true, message: "$comment不能为空", trigger: "blur" }
+          { required: true, message: "练习ID不能为空", trigger: "blur" }
         ],
         questionId: [
-          { required: true, message: "$comment不能为空", trigger: "blur" }
+          { required: true, message: "问题ID不能为空", trigger: "blur" }
         ],
         questionOrder: [
           { required: true, message: "题目在练习中的顺序不能为空", trigger: "blur" }
@@ -195,6 +195,16 @@ export default {
     };
   },
   created() {
+    // 获取路由参数中的练习ID
+    const exerciseId = this.$route.query.exerciseId;
+
+    // 当存在exerciseId且当前没有表单数据时
+    if (exerciseId && !this.form.exerciseId) {
+      this.handleAdd(); // 自动打开新增对话框
+      this.$nextTick(() => {
+        this.form.exerciseId = exerciseId; // 自动填充练习ID
+      });
+    }
     this.getList();
   },
   methods: {
@@ -264,6 +274,7 @@ export default {
               this.$modal.msgSuccess("修改成功");
               this.open = false;
               this.getList();
+              this.$router.replace({ query: {} });
             });
           } else {
             addCorrelation(this.form).then(response => {

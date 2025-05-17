@@ -116,6 +116,13 @@
           <el-button
             size="mini"
             type="text"
+            icon="el-icon-plus"
+            @click="handleAddQuestion(scope.row)"
+            v-hasPermi="['edu:correlation:add']"
+          >添加练习题</el-button>
+          <el-button
+            size="mini"
+            type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['edu:exercises:edit']"
@@ -176,11 +183,48 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+    <!-- 添加题目关联对话框 -->
+    <el-dialog :title="titleQuestion" :visible.sync="openQuestion" width="500px" append-to-body>
+      <el-form ref="questionForm" :model="questionForm" :rules="questionRules" label-width="120px">
+        <el-form-item label="练习 ID" prop="exerciseId">
+          <el-input
+            v-model="questionForm.exerciseId"
+            placeholder="自动获取练习ID"
+            :disabled="true"/>
+        </el-form-item>
+        <el-form-item label="问题 ID" prop="questionId">
+          <el-input
+            v-model="questionForm.questionId"
+            placeholder="请输入问题ID"
+            clearable/>
+        </el-form-item>
+        <el-form-item label="题目顺序" prop="questionOrder">
+          <el-input-number
+            v-model="questionForm.questionOrder"
+            :min="1"
+            controls-position="right"/>
+        </el-form-item>
+        <el-form-item label="本题分值" prop="score">
+          <el-input-number
+            v-model="questionForm.score"
+            :min="0"
+            :precision="1"
+            :step="0.5"
+            controls-position="right"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitQuestionForm">确 定</el-button>
+        <el-button @click="openQuestion = false">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { listExercises, getExercises, delExercises, addExercises, updateExercises } from "@/api/edu/exercises"
+import { listCorrelation, getCorrelation, delCorrelation, addCorrelation, updateCorrelation } from "@/api/edu/correlation";
+import { listQuestions, getQuestions, delQuestions, addQuestions, updateQuestions } from "@/api/edu/questions";
 
 export default {
   name: 'Exercises',
@@ -226,6 +270,29 @@ export default {
         userId: [
           { required: true, message: '创建练习的老师ID不能为空', trigger: 'blur' }
         ]
+      },
+        // 题目弹出层标题
+      titleQuestion: '',
+      // 题目弹出层状态
+      openQuestion: false,
+      // 题目表单参数
+      questionForm: {},
+      // 题目表单校验
+      questionRules: {
+        exerciseId: [
+          { required: true, message: '练习ID不能为空', trigger: 'blur' }
+        ],
+        questionId: [
+          { required: true, message: '问题ID不能为空', trigger: 'blur' }
+        ],
+        questionOrder: [
+          { required: true, message: '题目顺序不能为空', trigger: 'blur' },
+          { pattern: /^[0-9]+$/, message: '请输入有效数字' }
+        ],
+        score: [
+          { required: true, message: '分值不能为空', trigger: 'blur' },
+          { pattern: /^[0-9]+$/, message: '请输入有效数字' }
+        ]
       }
     }
   },
@@ -233,6 +300,34 @@ export default {
     this.getList()
   },
   methods: {
+    // 添加练习题操作
+    handleAddQuestion(row) {
+      this.resetQuestionForm();
+      this.openQuestion = true;
+      this.title = '添加练习题';
+      this.questionForm.exerciseId = row.exerciseId;  // 自动携带当前练习ID
+    },
+
+    // 题目表单重置
+    resetQuestionForm() {
+      this.questionForm = {
+        ...this.questionForm,
+        questionId: null,
+        questionOrder: null,
+        score: null
+      }
+    },
+        // 题目提交按钮
+    submitQuestionForm() {
+      this.$refs['questionForm'].validate(valid => {
+        if (valid) {
+          addCorrelation(this.questionForm).then(response => {
+            this.$modal.msgSuccess('添加成功');
+            this.openQuestion = false;
+          })
+        }
+      })
+    },
     /** 查询练习集合列表 */
     getList() {
       this.loading = true
