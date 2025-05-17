@@ -88,17 +88,6 @@ export const constantRoutes = [
       }
     ]
   },
-  {
-    path: '/edu/correlation',
-    component: () => import('@/views/edu/correlation/index'),
-    name: 'Correlation',
-    meta: {
-      title: '练习关联管理',
-      icon: 'el-icon-link',
-      // 如果使用权限控制需添加：
-      // roles: ['edu:correlation:list']
-    }
-  }
 ]
 
 // 动态路由，基于用户权限动态去加载
