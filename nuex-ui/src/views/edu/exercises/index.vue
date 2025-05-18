@@ -221,6 +221,24 @@
             :step="0.5"
             controls-position="right"/>
         </el-form-item>
+        <el-form ref="questionForm" :model="questionForm" :rules="questionRules" label-width="120px">
+          <el-table :data="mergedList">
+            <el-table-column label="题目 ID" prop="questionId" />
+            <el-table-column label="题目内容" prop="questionText" />
+            <el-table-column label="题目顺序" prop="questionOrder" />
+            <el-table-column label="本题分值" prop="score" />
+            <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+              <template slot-scope="scope">
+                <el-button
+                  size="mini"
+                  type="text"
+                  icon="el-icon-delete"
+                  @click="handleDeleteCorrelation(scope.row)"
+                >删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-form>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitQuestionForm">确 定</el-button>
@@ -315,19 +333,55 @@ export default {
       },
       dialogQuestionSelectVisible: false,
       // 题目列表
-      questionList: []
+      questionList: [],
+      correlationList: [],
+      questionForm: {
+        exerciseId: null,
+        questionId: null,
+        questionText: null,
+        questionOrder: null,
+        score: null
+      },
+      mergedList: []
     }
   },
   created() {
     this.getList()
   },
   methods: {
+    handleDeleteCorrelation(row) {
+      console.log(row);
+      const correlationId = row.id;
+      this.$modal.confirm('是否确认删除该关联题目？').then(() => {
+        return delCorrelation(correlationId);
+      }).then(() => {
+        this.$modal.msgSuccess('删除成功');
+        this.getList();
+      }).catch(() => {});
+    },
     // 添加练习题操作
     handleAddQuestion(row) {
       this.resetQuestionForm();
       this.openQuestion = true;
       this.title = '添加练习题';
-      this.questionForm.exerciseId = row.exerciseId;  // 自动携带当前练习ID
+      this.questionForm.exerciseId = row.exerciseId;
+
+      // 获取关联的题目列表
+      listCorrelation({ exerciseId: row.exerciseId }).then(response => {
+        this.correlationList = response.rows;
+
+        // 获取所有题目列表
+        this.getQuestionList().then(() => {
+          // 将 correlationList 和 questionList 合并
+          this.mergedList = this.correlationList.map(correlation => {
+            const question = this.questionList.find(q => q.questionId === correlation.questionId);
+            return {
+              ...correlation,
+              questionText: question ? question.questionText : '未知题目'
+            };
+          });
+        });
+      });
     },
 
     // 题目表单重置
@@ -361,14 +415,15 @@ export default {
     },
     getQuestionList() {
       this.loading = true;
-      listQuestions().then(response => {
+      return listQuestions().then(response => {
         this.questionList = response.rows; // 将题目列表赋值给 questionList
         this.loading = false;
       });
     },
     selectQuestion(question) {
-      this.questionForm.questionId = question.questionId; // 将选择的题目 ID 绑定到 questionForm.questionId
-      this.dialogQuestionSelectVisible = false; // 关闭题目选择对话框
+      this.questionForm.questionId = question.questionId;
+      this.questionForm.questionText = question.questionText;
+      this.dialogQuestionSelectVisible = false;
     },
     openQuestionSelect() {
       this.$refs['questionForm'].clearValidate(); // 清除表单验证
