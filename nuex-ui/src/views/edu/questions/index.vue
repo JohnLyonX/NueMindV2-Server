@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="问题文本" prop="questionText">
+        <el-input
+          v-model="queryParams.questionText"
+          placeholder="请输入问题文本"
+          clearable
+          @keyup.enter.native="questionText"
+        />
+      </el-form-item>
       <el-form-item label="选项 A" prop="optionA">
         <el-input
           v-model="queryParams.optionA"

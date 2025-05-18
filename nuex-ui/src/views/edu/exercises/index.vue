@@ -195,8 +195,17 @@
         <el-form-item label="问题 ID" prop="questionId">
           <el-input
             v-model="questionForm.questionId"
-            placeholder="请输入问题ID"
-            clearable/>
+            placeholder="请选择题目"
+            clearable
+            readonly
+            style="width: calc(100% - 100px)"
+          >
+            <el-button
+              slot="append"
+              icon="el-icon-search"
+              @click="openQuestionSelect"
+            >选择题目</el-button>
+          </el-input>
         </el-form-item>
         <el-form-item label="题目顺序" prop="questionOrder">
           <el-input-number
@@ -216,6 +225,16 @@
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitQuestionForm">确 定</el-button>
         <el-button @click="openQuestion = false">取 消</el-button>
+      </div>
+    </el-dialog>
+    <el-dialog title="选择题目" :visible.sync="dialogQuestionSelectVisible" width="800px" append-to-body>
+      <el-table :data="questionList" @row-click="selectQuestion">
+        <el-table-column label="题目 ID" prop="questionId" />
+        <el-table-column label="题目内容" prop="questionText" />
+        <el-table-column label="课程名称" prop="coursesName" />
+      </el-table>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogQuestionSelectVisible = false">取 消</el-button>
       </div>
     </el-dialog>
   </div>
@@ -283,7 +302,7 @@ export default {
           { required: true, message: '练习ID不能为空', trigger: 'blur' }
         ],
         questionId: [
-          { required: true, message: '问题ID不能为空', trigger: 'blur' }
+          { required: true, message: '问题ID不能为空', trigger: 'change' }
         ],
         questionOrder: [
           { required: true, message: '题目顺序不能为空', trigger: 'blur' },
@@ -293,7 +312,10 @@ export default {
           { required: true, message: '分值不能为空', trigger: 'blur' },
           { pattern: /^[0-9]+$/, message: '请输入有效数字' }
         ]
-      }
+      },
+      dialogQuestionSelectVisible: false,
+      // 题目列表
+      questionList: []
     }
   },
   created() {
@@ -336,6 +358,22 @@ export default {
         this.total = response.total
         this.loading = false
       })
+    },
+    getQuestionList() {
+      this.loading = true;
+      listQuestions().then(response => {
+        this.questionList = response.rows; // 将题目列表赋值给 questionList
+        this.loading = false;
+      });
+    },
+    selectQuestion(question) {
+      this.questionForm.questionId = question.questionId; // 将选择的题目 ID 绑定到 questionForm.questionId
+      this.dialogQuestionSelectVisible = false; // 关闭题目选择对话框
+    },
+    openQuestionSelect() {
+      this.$refs['questionForm'].clearValidate(); // 清除表单验证
+      this.dialogQuestionSelectVisible = true; // 打开题目选择对话框
+      this.getQuestionList(); // 获取题目列表
     },
     // 取消按钮
     cancel() {
