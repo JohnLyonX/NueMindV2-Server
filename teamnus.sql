@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80040
 File Encoding         : 65001
 
-Date: 2025-05-15 13:36:59
+Date: 2025-05-18 23:31:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -295,13 +295,14 @@ CREATE TABLE `edu_exercises` (
   PRIMARY KEY (`exercise_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `edu_exercises_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises
 -- ----------------------------
 INSERT INTO `edu_exercises` VALUES ('1', '数据库基础测试', '测试数据库基础知识', '1', '2025-05-14 19:00:55', '2023-06-01 00:00:00', '30', '1');
 INSERT INTO `edu_exercises` VALUES ('2', '网络基础小测', '简单的网络知识测试', '1', '2025-05-14 19:00:55', '2023-06-10 00:00:00', '20', '1');
+INSERT INTO `edu_exercises` VALUES ('9', '1', '1', '1', '2025-05-17 00:00:00', '2025-05-17 00:00:00', '120', '0');
 
 -- ----------------------------
 -- Table structure for edu_exercises_questions
@@ -322,7 +323,7 @@ CREATE TABLE `edu_exercises_questions` (
   KEY `user_id` (`user_id`),
   CONSTRAINT `edu_exercises_questions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`user_id`),
   CONSTRAINT `edu_exercises_questions_chk_1` CHECK ((`correct_answer` in (_utf8mb3'A',_utf8mb3'B',_utf8mb3'C',_utf8mb3'D')))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises_questions
@@ -351,15 +352,16 @@ CREATE TABLE `edu_exercises_student_answers` (
   CONSTRAINT `edu_exercises_student_answers_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`),
   CONSTRAINT `edu_exercises_student_answers_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`),
   CONSTRAINT `edu_exercises_student_answers_chk_1` CHECK ((`selected_answer` in (_utf8mb3'A',_utf8mb3'B',_utf8mb3'C',_utf8mb3'D')))
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises_student_answers
 -- ----------------------------
-INSERT INTO `edu_exercises_student_answers` VALUES ('5', '100', '1', '1', 'B', '1', '2025-05-14 19:07:38');
-INSERT INTO `edu_exercises_student_answers` VALUES ('6', '100', '1', '2', 'C', '1', '2025-05-14 19:07:38');
 INSERT INTO `edu_exercises_student_answers` VALUES ('7', '101', '1', '1', 'A', '0', '2025-05-14 19:07:38');
-INSERT INTO `edu_exercises_student_answers` VALUES ('8', '101', '1', '2', 'B', '0', '2025-05-14 19:07:38');
+INSERT INTO `edu_exercises_student_answers` VALUES ('15', '101', '1', '3', 'B', '0', '2025-05-15 21:01:44');
+INSERT INTO `edu_exercises_student_answers` VALUES ('16', '101', '2', '1', 'B', '1', '2025-05-15 00:00:00');
+INSERT INTO `edu_exercises_student_answers` VALUES ('18', '101', '2', '2', 'c', '1', '2025-05-16 00:00:00');
+INSERT INTO `edu_exercises_student_answers` VALUES ('19', '101', '1', '2', 'c', '1', '2025-05-16 00:00:00');
 
 -- ----------------------------
 -- Table structure for edu_exercise_questions_correlation
@@ -376,14 +378,15 @@ CREATE TABLE `edu_exercise_questions_correlation` (
   KEY `question_id` (`question_id`),
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`) ON DELETE CASCADE,
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_questions_correlation
 -- ----------------------------
-INSERT INTO `edu_exercise_questions_correlation` VALUES ('1', '1', '1', '1', '2');
-INSERT INTO `edu_exercise_questions_correlation` VALUES ('2', '1', '2', '2', '3');
-INSERT INTO `edu_exercise_questions_correlation` VALUES ('3', '2', '3', '1', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('5', '2', '1', '2', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('8', '2', '2', '3', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('12', '1', '1', '1', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('30', '1', '2', '2', '0');
 
 -- ----------------------------
 -- Table structure for edu_exercise_scores
@@ -401,13 +404,14 @@ CREATE TABLE `edu_exercise_scores` (
   KEY `exercise_id` (`exercise_id`),
   CONSTRAINT `edu_exercise_scores_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `sys_user` (`user_id`),
   CONSTRAINT `edu_exercise_scores_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_scores
 -- ----------------------------
-INSERT INTO `edu_exercise_scores` VALUES ('1', '100', '1', '5.00', '5', '2025-05-14 19:08:17');
-INSERT INTO `edu_exercise_scores` VALUES ('2', '101', '1', '0.00', '5', '2025-05-14 19:08:17');
+INSERT INTO `edu_exercise_scores` VALUES ('2', '101', '1', '3.00', '5', '2025-05-14 19:08:17');
+INSERT INTO `edu_exercise_scores` VALUES ('4', '101', '2', '4.00', '4', '2025-05-15 23:40:30');
+INSERT INTO `edu_exercise_scores` VALUES ('12', '1', '1', '0.00', '10', '2025-05-16 00:21:22');
 
 -- ----------------------------
 -- Table structure for edu_student
@@ -1072,7 +1076,7 @@ CREATE TABLE `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=449 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=460 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1426,6 +1430,17 @@ INSERT INTO `sys_logininfor` VALUES ('445', 'admin', '127.0.0.1', '内网IP', 'C
 INSERT INTO `sys_logininfor` VALUES ('446', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-14 19:59:58');
 INSERT INTO `sys_logininfor` VALUES ('447', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-05-15 09:24:50');
 INSERT INTO `sys_logininfor` VALUES ('448', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-15 09:24:55');
+INSERT INTO `sys_logininfor` VALUES ('449', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-15 16:36:20');
+INSERT INTO `sys_logininfor` VALUES ('450', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-15 19:43:30');
+INSERT INTO `sys_logininfor` VALUES ('451', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-15 21:03:14');
+INSERT INTO `sys_logininfor` VALUES ('452', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-15 23:37:47');
+INSERT INTO `sys_logininfor` VALUES ('453', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-16 15:43:10');
+INSERT INTO `sys_logininfor` VALUES ('454', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-16 17:30:23');
+INSERT INTO `sys_logininfor` VALUES ('455', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-16 18:34:35');
+INSERT INTO `sys_logininfor` VALUES ('456', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-16 21:33:34');
+INSERT INTO `sys_logininfor` VALUES ('457', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-17 22:16:02');
+INSERT INTO `sys_logininfor` VALUES ('458', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-18 13:09:25');
+INSERT INTO `sys_logininfor` VALUES ('459', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-18 16:47:21');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1453,7 +1468,7 @@ CREATE TABLE `sys_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2104 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2107 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='菜单权限表';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -1590,6 +1605,9 @@ INSERT INTO `sys_menu` VALUES ('2100', '练习编辑', '2096', '3', '', null, nu
 INSERT INTO `sys_menu` VALUES ('2101', '智能管家对话', '2102', '1', 'butler', 'butler/chat/index', null, '', '1', '0', 'C', '0', '0', '', 'people', 'admin', '2025-04-24 17:47:05', 'admin', '2025-04-24 18:18:18', '');
 INSERT INTO `sys_menu` VALUES ('2102', '智能管家Center', '0', '5', 'butler', null, null, '', '1', '0', 'M', '0', '0', null, 'example', 'admin', '2025-04-24 18:17:36', '', null, '');
 INSERT INTO `sys_menu` VALUES ('2103', '练习删除', '2096', '4', '', null, null, '', '1', '0', 'F', '0', '0', 'edu:exercises:remove', '#', 'admin', '2025-05-15 09:50:14', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2104', '题目练习题关联', '2095', '3', 'correlation', 'edu/correlation/index', null, '', '1', '0', 'C', '0', '0', 'edu:correlation:list', 'cascader', 'admin', '2025-05-15 16:56:46', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2105', '学生练习得分', '2095', '4', 'scores', 'edu/scores/index', null, '', '1', '0', 'C', '0', '0', 'edu:scores:list', 'edit', 'admin', '2025-05-15 17:05:15', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2106', '学生作答情况', '2095', '5', 'answers', 'edu/answers/index', null, '', '1', '0', 'C', '0', '0', 'deu:answers:list', 'people', 'admin', '2025-05-15 17:12:54', '', null, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1641,7 +1659,7 @@ CREATE TABLE `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=724 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=794 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2270,6 +2288,76 @@ INSERT INTO `sys_oper_log` VALUES ('720', '菜单管理', '2', 'com.nuex.web.con
 INSERT INTO `sys_oper_log` VALUES ('721', '菜单管理', '1', 'com.nuex.web.controller.system.SysMenuController.add()', 'POST', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"练习删除\",\"menuType\":\"F\",\"orderNum\":4,\"params\":{},\"parentId\":2096,\"perms\":\"edu:exercises:remove\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 09:50:14', '12');
 INSERT INTO `sys_oper_log` VALUES ('722', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-15 00:00:00\",\"description\":\"zzzzzzzzz\",\"exerciseId\":3,\"params\":{},\"submissionTime\":\"2025-05-17\",\"timeLimit\":120,\"title\":\"ljs\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 09:51:03', '10');
 INSERT INTO `sys_oper_log` VALUES ('723', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/3', '127.0.0.1', '内网IP', '[3]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 09:51:20', '10');
+INSERT INTO `sys_oper_log` VALUES ('724', '练习题目', '1', 'com.nuex.edu.controller.EduExercisesQuestionsController.add()', 'POST', '1', 'admin', '教研学院', '/edu/questions', '127.0.0.1', '内网IP', '{\"correctAnswer\":\"3\",\"optionA\":\"11\",\"optionB\":\"22\",\"optionC\":\"33\",\"optionD\":\"44\",\"params\":{},\"questionText\":\"123\",\"userId\":1}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Check constraint \'edu_exercises_questions_chk_1\' is violated.\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesQuestionsMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExercisesQuestionsMapper.insertEduExercisesQuestions-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercises_questions          ( question_text,             option_a,             option_b,             option_c,             option_d,             correct_answer,                                       user_id )           values ( ?,             ?,             ?,             ?,             ?,             ?,                                       ? )\r\n### Cause: java.sql.SQLException: Check constraint \'edu_exercises_questions_chk_1\' is violated.\n; uncategorized SQLException; SQL state [HY000]; error code [3819]; Check constraint \'edu_exercises_questions_chk_1\' is violated.; nested exception is java.sql.SQLException: Check constraint \'edu_exercises_questions_chk_1\' is violated.', '2025-05-15 16:36:54', '61');
+INSERT INTO `sys_oper_log` VALUES ('725', '练习题目', '1', 'com.nuex.edu.controller.EduExercisesQuestionsController.add()', 'POST', '1', 'admin', '教研学院', '/edu/questions', '127.0.0.1', '内网IP', '{\"correctAnswer\":\"b\",\"optionA\":\"11\",\"optionB\":\"22\",\"optionC\":\"33\",\"optionD\":\"44\",\"params\":{},\"questionId\":4,\"questionText\":\"123\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 16:37:01', '12');
+INSERT INTO `sys_oper_log` VALUES ('726', '练习题目', '2', 'com.nuex.edu.controller.EduExercisesQuestionsController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/questions', '127.0.0.1', '内网IP', '{\"correctAnswer\":\"a\",\"optionA\":\"11\",\"optionB\":\"22\",\"optionC\":\"33\",\"optionD\":\"44\",\"params\":{},\"questionId\":4,\"questionText\":\"123\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 16:49:26', '9');
+INSERT INTO `sys_oper_log` VALUES ('727', '练习题目', '3', 'com.nuex.edu.controller.EduExercisesQuestionsController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/questions/4', '127.0.0.1', '内网IP', '[4]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 16:50:21', '13');
+INSERT INTO `sys_oper_log` VALUES ('728', '菜单管理', '1', 'com.nuex.web.controller.system.SysMenuController.add()', 'POST', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/correlation/index\",\"createBy\":\"admin\",\"icon\":\"cascader\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"题目练习题关联\",\"menuType\":\"C\",\"orderNum\":3,\"params\":{},\"parentId\":2095,\"path\":\"correlation\",\"perms\":\"edu:correlation:list\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 16:56:46', '21');
+INSERT INTO `sys_oper_log` VALUES ('729', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"id\":4,\"params\":{},\"questionId\":2,\"questionOrder\":2,\"score\":3}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 16:59:58', '12');
+INSERT INTO `sys_oper_log` VALUES ('730', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/4', '127.0.0.1', '内网IP', '[4]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 17:00:07', '8');
+INSERT INTO `sys_oper_log` VALUES ('731', '菜单管理', '1', 'com.nuex.web.controller.system.SysMenuController.add()', 'POST', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/scores/index\",\"createBy\":\"admin\",\"icon\":\"edit\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"学生练习得分\",\"menuType\":\"C\",\"orderNum\":4,\"params\":{},\"parentId\":2095,\"path\":\"scores\",\"perms\":\"edu:scores:list\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 17:05:15', '11');
+INSERT INTO `sys_oper_log` VALUES ('732', '菜单管理', '1', 'com.nuex.web.controller.system.SysMenuController.add()', 'POST', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/answers/index\",\"createBy\":\"admin\",\"icon\":\"people\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"学生作答情况\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2095,\"path\":\"answers\",\"perms\":\"deu:answers:list\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 17:12:54', '12');
+INSERT INTO `sys_oper_log` VALUES ('733', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":9,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"c\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 19:55:15', '19');
+INSERT INTO `sys_oper_log` VALUES ('734', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":10,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"a\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 20:12:53', '25');
+INSERT INTO `sys_oper_log` VALUES ('735', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/9', '127.0.0.1', '内网IP', '[9]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 20:13:08', '9');
+INSERT INTO `sys_oper_log` VALUES ('736', '学生提交答案表', '2', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":10,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"isCorrect\":0,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"c\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 20:13:26', '7');
+INSERT INTO `sys_oper_log` VALUES ('737', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":11,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"c\",\"studentId\":100}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 20:14:25', '7');
+INSERT INTO `sys_oper_log` VALUES ('738', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/10,11', '127.0.0.1', '内网IP', '[10,11]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 20:14:40', '7');
+INSERT INTO `sys_oper_log` VALUES ('739', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"id\":5,\"params\":{},\"questionId\":1,\"questionOrder\":2,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 23:39:24', '14');
+INSERT INTO `sys_oper_log` VALUES ('740', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":16,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"B\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 23:40:30', '12');
+INSERT INTO `sys_oper_log` VALUES ('741', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"id\":6,\"params\":{},\"questionId\":2,\"questionOrder\":3,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 23:41:22', '9');
+INSERT INTO `sys_oper_log` VALUES ('742', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":17,\"answerTime\":\"2025-05-15 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-15 23:41:44', '8');
+INSERT INTO `sys_oper_log` VALUES ('743', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"params\":{},\"questionId\":3,\"questionOrder\":3,\"score\":2}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'2-3\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-3\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-15 23:59:50', '85');
+INSERT INTO `sys_oper_log` VALUES ('744', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/6', '127.0.0.1', '内网IP', '[6]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:00:08', '9');
+INSERT INTO `sys_oper_log` VALUES ('745', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"id\":8,\"params\":{},\"questionId\":2,\"questionOrder\":3,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:00:24', '7');
+INSERT INTO `sys_oper_log` VALUES ('746', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/17', '127.0.0.1', '内网IP', '[17]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:00:39', '6');
+INSERT INTO `sys_oper_log` VALUES ('747', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":18,\"answerTime\":\"2025-05-16 00:00:00\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"c\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:00:51', '8');
+INSERT INTO `sys_oper_log` VALUES ('748', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":19,\"answerTime\":\"2025-05-16 00:00:00\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"c\",\"studentId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:03:24', '9');
+INSERT INTO `sys_oper_log` VALUES ('749', '成绩表', '3', 'com.nuex.edu.controller.EduExerciseScoresController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/scores/1', '127.0.0.1', '内网IP', '[1]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:07:50', '7');
+INSERT INTO `sys_oper_log` VALUES ('750', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/5,6', '127.0.0.1', '内网IP', '[5,6]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 00:08:02', '6');
+INSERT INTO `sys_oper_log` VALUES ('751', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/4', '127.0.0.1', '内网IP', '[4]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 17:30:31', '20');
+INSERT INTO `sys_oper_log` VALUES ('752', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-16 00:00:00\",\"description\":\"测试\",\"exerciseId\":5,\"params\":{},\"submissionTime\":\"2025-05-17\",\"timeLimit\":120,\"title\":\"测试\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 17:30:45', '26');
+INSERT INTO `sys_oper_log` VALUES ('753', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-16 00:00:00\",\"description\":\"1\",\"exerciseId\":6,\"params\":{},\"submissionTime\":\"2025-05-16\",\"timeLimit\":12,\"title\":\"1\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 19:26:44', '34');
+INSERT INTO `sys_oper_log` VALUES ('754', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/6', '127.0.0.1', '内网IP', '[6]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 19:26:53', '6');
+INSERT INTO `sys_oper_log` VALUES ('755', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-16 00:00:00\",\"description\":\"1\",\"exerciseId\":7,\"params\":{},\"submissionTime\":\"2025-05-16\",\"timeLimit\":120,\"title\":\"1\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 19:34:36', '11');
+INSERT INTO `sys_oper_log` VALUES ('756', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/7', '127.0.0.1', '内网IP', '[7]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 19:42:44', '7');
+INSERT INTO `sys_oper_log` VALUES ('757', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-16 00:00:00\",\"description\":\"1\",\"exerciseId\":8,\"params\":{},\"submissionTime\":\"2025-05-16\",\"timeLimit\":120,\"title\":\"1\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 19:42:51', '9');
+INSERT INTO `sys_oper_log` VALUES ('758', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-16 00:00:00\",\"description\":\"1\",\"exerciseId\":8,\"params\":{},\"status\":0,\"submissionTime\":\"2025-05-16\",\"timeLimit\":120,\"title\":\"1\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-16 20:07:09', '5');
+INSERT INTO `sys_oper_log` VALUES ('759', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"questionId\":2,\"questionOrder\":1,\"score\":2}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-2\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-2\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'1-2\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-2\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-16 21:42:29', '134');
+INSERT INTO `sys_oper_log` VALUES ('760', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/8', '127.0.0.1', '内网IP', '[8]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 22:51:51', '14');
+INSERT INTO `sys_oper_log` VALUES ('761', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/5', '127.0.0.1', '内网IP', '[5]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 22:51:54', '8');
+INSERT INTO `sys_oper_log` VALUES ('762', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-17 00:00:00\",\"description\":\"1\",\"exerciseId\":9,\"params\":{},\"submissionTime\":\"2025-05-17\",\"timeLimit\":120,\"title\":\"1\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 22:52:08', '12');
+INSERT INTO `sys_oper_log` VALUES ('763', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":16,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 22:57:27', '13');
+INSERT INTO `sys_oper_log` VALUES ('764', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":17,\"params\":{},\"questionId\":2,\"questionOrder\":1,\"score\":0}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 22:58:07', '9');
+INSERT INTO `sys_oper_log` VALUES ('765', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":18,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-17 23:07:39', '7');
+INSERT INTO `sys_oper_log` VALUES ('766', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 14:22:12', '62');
+INSERT INTO `sys_oper_log` VALUES ('767', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/18', '127.0.0.1', '内网IP', '[18]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:27:06', '12');
+INSERT INTO `sys_oper_log` VALUES ('768', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/17', '127.0.0.1', '内网IP', '[17]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:27:08', '6');
+INSERT INTO `sys_oper_log` VALUES ('769', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/16', '127.0.0.1', '内网IP', '[16]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:27:09', '7');
+INSERT INTO `sys_oper_log` VALUES ('770', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":20,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:27:28', '8');
+INSERT INTO `sys_oper_log` VALUES ('771', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":21,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:31:32', '7');
+INSERT INTO `sys_oper_log` VALUES ('772', '练习题目关联表', '2', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":21,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:33:48', '2');
+INSERT INTO `sys_oper_log` VALUES ('773', '练习题目关联表', '2', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":21,\"params\":{},\"questionId\":3,\"questionOrder\":2,\"score\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:33:55', '5');
+INSERT INTO `sys_oper_log` VALUES ('774', '练习题目关联表', '2', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":21,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 14:33:58', '7');
+INSERT INTO `sys_oper_log` VALUES ('775', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 15:11:09', '5');
+INSERT INTO `sys_oper_log` VALUES ('776', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":23,\"params\":{},\"questionId\":2,\"questionOrder\":1,\"score\":0}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:11:14', '5');
+INSERT INTO `sys_oper_log` VALUES ('777', '练习题目关联表', '2', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"id\":23,\"params\":{},\"questionOrder\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:11:46', '6');
+INSERT INTO `sys_oper_log` VALUES ('778', '练习题目关联表', '2', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"id\":21,\"params\":{},\"questionOrder\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:11:46', '4');
+INSERT INTO `sys_oper_log` VALUES ('779', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/14', '127.0.0.1', '内网IP', '[14]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:12:36', '7');
+INSERT INTO `sys_oper_log` VALUES ('780', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/13', '127.0.0.1', '内网IP', '[13]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:12:40', '6');
+INSERT INTO `sys_oper_log` VALUES ('781', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/23', '127.0.0.1', '内网IP', '[23]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:12:42', '5');
+INSERT INTO `sys_oper_log` VALUES ('782', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/21', '127.0.0.1', '内网IP', '[21]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:12:44', '5');
+INSERT INTO `sys_oper_log` VALUES ('783', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":24,\"params\":{},\"questionId\":2,\"questionOrder\":2,\"score\":0}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:12:55', '6');
+INSERT INTO `sys_oper_log` VALUES ('784', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'9-1\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-1\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 15:21:28', '4');
+INSERT INTO `sys_oper_log` VALUES ('785', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"params\":{},\"questionId\":2,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-2\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-2\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'9-2\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-2\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 15:21:31', '4');
+INSERT INTO `sys_oper_log` VALUES ('786', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":27,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":0}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 15:21:36', '5');
+INSERT INTO `sys_oper_log` VALUES ('787', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'9-3\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 16:47:59', '4');
+INSERT INTO `sys_oper_log` VALUES ('788', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 16:55:55', '4');
+INSERT INTO `sys_oper_log` VALUES ('789', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"id\":30,\"params\":{},\"questionId\":2,\"questionOrder\":2,\"score\":0}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 16:56:00', '7');
+INSERT INTO `sys_oper_log` VALUES ('790', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":9,\"id\":31,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 17:13:51', '4');
+INSERT INTO `sys_oper_log` VALUES ('791', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/31', '127.0.0.1', '内网IP', '[31]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 17:14:20', '8');
+INSERT INTO `sys_oper_log` VALUES ('792', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"params\":{},\"questionId\":1,\"questionOrder\":1,\"score\":0}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-05-18 17:37:14', '4');
+INSERT INTO `sys_oper_log` VALUES ('793', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/3', '127.0.0.1', '内网IP', '[3]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-18 17:38:22', '8');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2513,7 +2601,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-15 09:24:56', 'admin', '2025-04-01 23:43:35', '', '2025-05-15 09:24:55', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-18 16:47:21', 'admin', '2025-04-01 23:43:35', '', '2025-05-18 16:47:21', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2025-04-01 23:43:35', 'admin', '2025-04-01 23:43:35', '', null, '测试员');
 INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '172.20.10.4', '2025-04-25 15:39:26', 'admin', '2025-04-14 15:27:10', 'admin', '2025-04-25 07:39:26', '测试');
 INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$0DjMqOb8WABfmdR4q8nWKuYqtAz1b/miABoBXmZ4V8hRDrPSmT4/a', '0', '0', '127.0.0.1', '2025-04-18 14:18:59', 'admin', '2025-04-14 21:47:43', 'admin', '2025-04-18 14:18:58', null);
@@ -2551,3 +2639,41 @@ CREATE TABLE `sys_user_role` (
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('100', '101');
 INSERT INTO `sys_user_role` VALUES ('101', '101');
+DROP TRIGGER IF EXISTS `check_answer_correctness`;
+DELIMITER ;;
+CREATE TRIGGER `check_answer_correctness` BEFORE INSERT ON `edu_exercises_student_answers` FOR EACH ROW BEGIN
+    DECLARE correct_answer CHAR(1);
+    SELECT q.correct_answer INTO correct_answer
+    FROM `edu_exercises_questions` q
+    WHERE q.question_id = NEW.question_id;
+    SET NEW.is_correct = (NEW.selected_answer = correct_answer);
+END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `update_exercise_score`;
+DELIMITER ;;
+CREATE TRIGGER `update_exercise_score` AFTER INSERT ON `edu_exercises_student_answers` FOR EACH ROW BEGIN
+    DECLARE v_total_score DECIMAL(5,2);
+    DECLARE v_max_score INT;
+    
+    -- 计算当前得分
+    SELECT IFNULL(SUM(CASE WHEN sa.is_correct THEN eq.score ELSE 0 END), 0)
+    INTO v_total_score
+    FROM edu_exercises_student_answers sa
+    JOIN edu_exercise_questions_correlation eq ON eq.question_id = sa.question_id 
+                                AND eq.exercise_id = sa.exercise_id
+    WHERE sa.student_id = NEW.student_id
+    AND sa.exercise_id = NEW.exercise_id;
+    -- 计算练习总分(所有关联题目的分数总和)
+    SELECT IFNULL(SUM(score), 0)
+    INTO v_max_score
+    FROM edu_exercise_questions_correlation
+    WHERE exercise_id = NEW.exercise_id;
+    -- 更新或插入成绩表
+    INSERT INTO edu_exercise_scores (student_id, exercise_id, total_score, max_score)
+    VALUES (NEW.student_id, NEW.exercise_id,  v_total_score, v_max_score)
+    ON DUPLICATE KEY UPDATE total_score = v_total_score,
+        max_score = v_max_score;
+END
+;;
+DELIMITER ;
