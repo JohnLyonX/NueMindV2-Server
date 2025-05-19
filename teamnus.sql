@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80040
 File Encoding         : 65001
 
-Date: 2025-05-19 21:41:42
+Date: 2025-05-19 22:27:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1076,7 +1076,7 @@ CREATE TABLE `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=476 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=480 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1457,6 +1457,10 @@ INSERT INTO `sys_logininfor` VALUES ('472', 'admin', '127.0.0.1', '内网IP', 'C
 INSERT INTO `sys_logininfor` VALUES ('473', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 20:34:21');
 INSERT INTO `sys_logininfor` VALUES ('474', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 20:48:12');
 INSERT INTO `sys_logininfor` VALUES ('475', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 21:38:22');
+INSERT INTO `sys_logininfor` VALUES ('476', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 21:44:30');
+INSERT INTO `sys_logininfor` VALUES ('477', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 22:06:57');
+INSERT INTO `sys_logininfor` VALUES ('478', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 22:09:01');
+INSERT INTO `sys_logininfor` VALUES ('479', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-19 22:27:10');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1623,7 +1627,7 @@ INSERT INTO `sys_menu` VALUES ('2102', '智能管家Center', '0', '5', 'butler',
 INSERT INTO `sys_menu` VALUES ('2103', '练习删除', '2096', '4', '', null, null, '', '1', '0', 'F', '0', '0', 'edu:exercises:remove', '#', 'admin', '2025-05-15 09:50:14', '', null, '');
 INSERT INTO `sys_menu` VALUES ('2104', '题目练习题关联', '2095', '3', 'correlation', 'edu/correlation/index', null, '', '1', '0', 'C', '0', '0', 'edu:correlation:list', 'cascader', 'admin', '2025-05-15 16:56:46', '', null, '');
 INSERT INTO `sys_menu` VALUES ('2105', '学生练习得分', '2095', '4', 'scores', 'edu/scores/index', null, '', '1', '0', 'C', '0', '0', 'edu:scores:list', 'edit', 'admin', '2025-05-15 17:05:15', '', null, '');
-INSERT INTO `sys_menu` VALUES ('2106', '学生作答情况', '2095', '5', 'answers', 'edu/answers/index', null, '', '1', '0', 'C', '0', '0', 'deu:answers:list', 'people', 'admin', '2025-05-15 17:12:54', '', null, '');
+INSERT INTO `sys_menu` VALUES ('2106', '学生作答情况', '2095', '5', 'answers', 'edu/answers/index', null, '', '1', '0', 'C', '0', '0', 'edu:answers:list', 'people', 'admin', '2025-05-15 17:12:54', 'admin', '2025-05-19 22:26:44', '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1675,7 +1679,7 @@ CREATE TABLE `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=806 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=810 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2386,6 +2390,10 @@ INSERT INTO `sys_oper_log` VALUES ('802', '角色管理', '2', 'com.nuex.web.con
 INSERT INTO `sys_oper_log` VALUES ('803', '角色管理', '2', 'com.nuex.web.controller.system.SysRoleController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-04-14 15:34:55\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2038,2039,2040,2041,2042,2043,2044,2076,2077,2078,2079,2080,2081,2082,2083,2084,2085,2086,2087,2088,2089,2090,2091,2092,2093,2094,2045,2046,2047,2048,2049,2050,2051,2058,2059,2060,2061,2062,2063,2095,2096,2098,2099,2100,2103,2097,2104,2105,2106],\"params\":{},\"remark\":\"测试\",\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":4,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 20:36:34', '10');
 INSERT INTO `sys_oper_log` VALUES ('804', '菜单管理', '2', 'com.nuex.web.controller.system.SysMenuController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/questions/index\",\"createTime\":\"2025-04-19 23:44:33\",\"icon\":\"skill\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2097,\"menuName\":\"练习题目库\",\"menuType\":\"C\",\"orderNum\":2,\"params\":{},\"parentId\":2095,\"path\":\"questions\",\"perms\":\"edu:questions:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 20:37:56', '12');
 INSERT INTO `sys_oper_log` VALUES ('805', '菜单管理', '2', 'com.nuex.web.controller.system.SysMenuController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createTime\":\"2025-04-19 23:36:17\",\"icon\":\"edit\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2095,\"menuName\":\"练习管理\",\"menuType\":\"M\",\"orderNum\":7,\"params\":{},\"parentId\":0,\"path\":\"exercisesgl\",\"perms\":\"\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 20:38:53', '9');
+INSERT INTO `sys_oper_log` VALUES ('806', '角色管理', '2', 'com.nuex.web.controller.system.SysRoleController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-04-14 15:34:55\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2095,2038,2039,2040,2041,2042,2043,2044,2076,2077,2078,2079,2080,2081,2082,2083,2084,2085,2086,2087,2088,2089,2090,2091,2092,2093,2094,2045,2046,2047,2048,2049,2050,2051,2058,2059,2060,2061,2062,2063,2096,2098,2099,2100,2103,2097,2104,2105],\"params\":{},\"remark\":\"测试\",\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":4,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 22:25:09', '17');
+INSERT INTO `sys_oper_log` VALUES ('807', '角色管理', '2', 'com.nuex.web.controller.system.SysRoleController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2025-04-14 15:34:55\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[2038,2039,2040,2041,2042,2043,2044,2076,2077,2078,2079,2080,2081,2082,2083,2084,2085,2086,2087,2088,2089,2090,2091,2092,2093,2094,2045,2046,2047,2048,2049,2050,2051,2058,2059,2060,2061,2062,2063,2095,2096,2098,2099,2100,2103,2097,2104,2105,2106],\"params\":{},\"remark\":\"测试\",\"roleId\":101,\"roleKey\":\"student\",\"roleName\":\"学生\",\"roleSort\":4,\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 22:25:14', '16');
+INSERT INTO `sys_oper_log` VALUES ('808', '菜单管理', '2', 'com.nuex.web.controller.system.SysMenuController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/answers/index\",\"createTime\":\"2025-05-15 17:12:54\",\"icon\":\"people\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2106,\"menuName\":\"学生作答情况\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2095,\"path\":\"answers\",\"perms\":\"deu:answers:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 22:26:09', '8');
+INSERT INTO `sys_oper_log` VALUES ('809', '菜单管理', '2', 'com.nuex.web.controller.system.SysMenuController.edit()', 'PUT', '1', 'admin', '教研学院', '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"edu/answers/index\",\"createTime\":\"2025-05-15 17:12:54\",\"icon\":\"people\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2106,\"menuName\":\"学生作答情况\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2095,\"path\":\"answers\",\"perms\":\"edu:answers:list\",\"routeName\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-19 22:26:44', '8');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2443,7 +2451,7 @@ CREATE TABLE `sys_role` (
 INSERT INTO `sys_role` VALUES ('1', '超级管理员', 'admin', '1', '1', '1', '1', '0', '0', 'admin', '2025-04-01 23:43:35', '', null, '超级管理员');
 INSERT INTO `sys_role` VALUES ('2', '普通角色', 'common', '2', '2', '1', '1', '0', '0', 'admin', '2025-04-01 23:43:35', 'admin', '2025-04-09 00:51:56', '普通角色');
 INSERT INTO `sys_role` VALUES ('100', '教职人员', 'edu', '3', '1', '1', '0', '0', '0', 'admin', '2025-04-09 00:54:17', 'admin', '2025-05-19 20:36:28', null);
-INSERT INTO `sys_role` VALUES ('101', '学生', 'student', '4', '1', '1', '1', '0', '0', 'admin', '2025-04-14 15:34:55', 'admin', '2025-05-19 20:36:34', '测试');
+INSERT INTO `sys_role` VALUES ('101', '学生', 'student', '4', '1', '1', '1', '0', '0', 'admin', '2025-04-14 15:34:55', 'admin', '2025-05-19 22:25:14', '测试');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -2687,9 +2695,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-19 20:34:21', 'admin', '2025-04-01 23:43:35', '', '2025-05-19 20:34:21', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-19 22:06:57', 'admin', '2025-04-01 23:43:35', '', '2025-05-19 22:06:57', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2025-04-01 23:43:35', 'admin', '2025-04-01 23:43:35', '', null, '测试员');
-INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-05-19 21:38:23', 'admin', '2025-04-14 15:27:10', 'admin', '2025-05-19 21:38:22', '测试');
+INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-05-19 22:27:10', 'admin', '2025-04-14 15:27:10', 'admin', '2025-05-19 22:27:10', '测试');
 INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$0DjMqOb8WABfmdR4q8nWKuYqtAz1b/miABoBXmZ4V8hRDrPSmT4/a', '0', '0', '127.0.0.1', '2025-04-18 14:18:59', 'admin', '2025-04-14 21:47:43', 'admin', '2025-04-18 14:18:58', null);
 
 -- ----------------------------
