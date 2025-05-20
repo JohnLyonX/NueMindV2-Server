@@ -90,4 +90,16 @@ public class EduExercisesStudentAnswersServiceImpl implements IEduExercisesStude
     {
         return eduExercisesStudentAnswersMapper.deleteEduExercisesStudentAnswersByAnswerId(answerId);
     }
+
+    /**
+     * 批量新增学生提交答案表
+     *
+     * @param answersList 学生提交的答案列表
+     * @return 结果
+     */
+    @Override
+    public int batchInsertEduExercisesStudentAnswers(List<EduExercisesStudentAnswers> answersList)
+    {
+        return eduExercisesStudentAnswersMapper.batchInsertEduExercisesStudentAnswers(answersList);
+    }
 }

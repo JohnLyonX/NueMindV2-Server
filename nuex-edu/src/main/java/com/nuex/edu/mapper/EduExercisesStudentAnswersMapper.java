@@ -58,4 +58,6 @@ public interface EduExercisesStudentAnswersMapper
      * @return 结果
      */
     public int deleteEduExercisesStudentAnswersByAnswerIds(Long[] answerIds);
+
+    int batchInsertEduExercisesStudentAnswers(List<EduExercisesStudentAnswers> answersList);
 }

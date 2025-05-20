@@ -75,10 +75,11 @@ public class EduExercisesStudentAnswersController extends BaseController
     @PreAuthorize("@ss.hasPermi('edu:answers:add')")
     @Log(title = "学生提交答案表", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody EduExercisesStudentAnswers eduExercisesStudentAnswers)
+    public AjaxResult add(@RequestBody List<EduExercisesStudentAnswers> answersList)
     {
-        return toAjax(eduExercisesStudentAnswersService.insertEduExercisesStudentAnswers(eduExercisesStudentAnswers));
+        return toAjax(eduExercisesStudentAnswersService.batchInsertEduExercisesStudentAnswers(answersList));
     }
+
 
     /**
      * 修改学生提交答案表

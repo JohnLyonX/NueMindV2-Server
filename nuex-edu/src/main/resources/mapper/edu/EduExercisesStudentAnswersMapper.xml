@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nuex.edu.mapper.EduExercisesStudentAnswersMapper">
-    
+
     <resultMap type="EduExercisesStudentAnswers" id="EduExercisesStudentAnswersResult">
         <result property="answerId"    column="answer_id"    />
         <result property="studentId"    column="student_id"    />
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectEduExercisesStudentAnswersList" parameterType="EduExercisesStudentAnswers" resultMap="EduExercisesStudentAnswersResult">
         <include refid="selectEduExercisesStudentAnswersVo"/>
-        <where>  
+        <where>
             <if test="studentId != null "> and student_id = #{studentId}</if>
             <if test="exerciseId != null "> and exercise_id = #{exerciseId}</if>
             <if test="questionId != null "> and question_id = #{questionId}</if>
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="answerTime != null "> and answer_time = #{answerTime}</if>
         </where>
     </select>
-    
+
     <select id="selectEduExercisesStudentAnswersByAnswerId" parameterType="Long" resultMap="EduExercisesStudentAnswersResult">
         <include refid="selectEduExercisesStudentAnswersVo"/>
         where answer_id = #{answerId}
@@ -73,9 +73,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteEduExercisesStudentAnswersByAnswerIds" parameterType="String">
-        delete from edu_exercises_student_answers where answer_id in 
+        delete from edu_exercises_student_answers where answer_id in
         <foreach item="answerId" collection="array" open="(" separator="," close=")">
             #{answerId}
         </foreach>
     </delete>
+    <insert id="batchInsertEduExercisesStudentAnswers">
+    INSERT INTO edu_exercises_student_answers
+    (student_id, exercise_id,question_id, selected_answer, answer_time)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+        (#{item.studentId}, #{item.exerciseId}, #{item.questionId}, #{item.selectedAnswer}, #{item.answerTime})
+    </foreach>
+</insert>
+
 </mapper>

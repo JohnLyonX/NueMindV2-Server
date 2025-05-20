@@ -5,15 +5,15 @@ import com.nuex.edu.domain.EduExercisesStudentAnswers;
 
 /**
  * 学生提交答案表Service接口
- * 
+ *
  * @author hfsui1
  * @date 2025-05-14
  */
-public interface IEduExercisesStudentAnswersService 
+public interface IEduExercisesStudentAnswersService
 {
     /**
      * 查询学生提交答案表
-     * 
+     *
      * @param answerId 学生提交答案表主键
      * @return 学生提交答案表
      */
@@ -21,7 +21,7 @@ public interface IEduExercisesStudentAnswersService
 
     /**
      * 查询学生提交答案表列表
-     * 
+     *
      * @param eduExercisesStudentAnswers 学生提交答案表
      * @return 学生提交答案表集合
      */
@@ -29,7 +29,7 @@ public interface IEduExercisesStudentAnswersService
 
     /**
      * 新增学生提交答案表
-     * 
+     *
      * @param eduExercisesStudentAnswers 学生提交答案表
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface IEduExercisesStudentAnswersService
 
     /**
      * 修改学生提交答案表
-     * 
+     *
      * @param eduExercisesStudentAnswers 学生提交答案表
      * @return 结果
      */
@@ -45,7 +45,7 @@ public interface IEduExercisesStudentAnswersService
 
     /**
      * 批量删除学生提交答案表
-     * 
+     *
      * @param answerIds 需要删除的学生提交答案表主键集合
      * @return 结果
      */
@@ -53,9 +53,17 @@ public interface IEduExercisesStudentAnswersService
 
     /**
      * 删除学生提交答案表信息
-     * 
+     *
      * @param answerId 学生提交答案表主键
      * @return 结果
      */
     public int deleteEduExercisesStudentAnswersByAnswerId(Long answerId);
+
+    /**
+     * 批量新增学生提交答案表
+     *
+     * @param answersList 学生提交的答案列表
+     * @return 结果
+     */
+    int batchInsertEduExercisesStudentAnswers(List<EduExercisesStudentAnswers> answersList);
 }
