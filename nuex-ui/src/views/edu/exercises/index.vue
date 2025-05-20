@@ -177,6 +177,12 @@
         <el-form-item label="时间限制(分钟)" prop="timeLimit">
           <el-input v-model="form.timeLimit" placeholder="请输入时间限制(分钟)" />
         </el-form-item>
+        <el-form-item label="是否已发布" prop="status">
+          <el-select v-model="form.status" placeholder="请选择状态">
+            <el-option label="已发布" value="1" />
+            <el-option label="未发布" value="0" />
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>

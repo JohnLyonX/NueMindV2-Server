@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80040
 File Encoding         : 65001
 
-Date: 2025-05-20 14:21:22
+Date: 2025-05-20 20:32:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -295,14 +295,14 @@ CREATE TABLE `edu_exercises` (
   PRIMARY KEY (`exercise_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `edu_exercises_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `sys_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises
 -- ----------------------------
-INSERT INTO `edu_exercises` VALUES ('1', '数据库基础测试', '测试数据库基础知识', '1', '2025-05-14 19:00:55', '2023-06-01 00:00:00', '30', '1');
+INSERT INTO `edu_exercises` VALUES ('1', '数据库基础测试', '测试数据库基础知识', '1', '2025-05-14 19:00:55', '2023-06-01 00:00:00', '30', '2');
 INSERT INTO `edu_exercises` VALUES ('2', '网络基础小测', '简单的网络知识测试', '1', '2025-05-14 19:00:55', '2023-06-10 00:00:00', '20', '1');
-INSERT INTO `edu_exercises` VALUES ('9', '1', '1', '1', '2025-05-17 00:00:00', '2025-05-17 00:00:00', '120', '0');
+INSERT INTO `edu_exercises` VALUES ('9', '1', '1', '100', '2025-05-17 00:00:00', '2025-05-17 00:00:00', '120', '0');
 
 -- ----------------------------
 -- Table structure for edu_exercises_questions
@@ -351,17 +351,13 @@ CREATE TABLE `edu_exercises_student_answers` (
   CONSTRAINT `edu_exercises_student_answers_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`),
   CONSTRAINT `edu_exercises_student_answers_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`),
   CONSTRAINT `edu_exercises_student_answers_chk_1` CHECK ((`selected_answer` in (_utf8mb4'A',_utf8mb4'B',_utf8mb4'C',_utf8mb4'D')))
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises_student_answers
 -- ----------------------------
-INSERT INTO `edu_exercises_student_answers` VALUES ('7', '101', '1', '1', 'A', '0', '2025-05-14 19:07:38');
-INSERT INTO `edu_exercises_student_answers` VALUES ('15', '101', '1', '3', 'B', '0', '2025-05-15 21:01:44');
-INSERT INTO `edu_exercises_student_answers` VALUES ('16', '101', '2', '1', 'B', '1', '2025-05-15 00:00:00');
-INSERT INTO `edu_exercises_student_answers` VALUES ('18', '101', '2', '2', 'c', '1', '2025-05-16 00:00:00');
-INSERT INTO `edu_exercises_student_answers` VALUES ('19', '101', '1', '2', 'c', '1', '2025-05-16 00:00:00');
-INSERT INTO `edu_exercises_student_answers` VALUES ('26', '1', '1', '1', 'a', '0', '2025-05-20 00:00:00');
+INSERT INTO `edu_exercises_student_answers` VALUES ('62', '1', '1', '1', 'C', '0', '2025-05-20 19:51:15');
+INSERT INTO `edu_exercises_student_answers` VALUES ('63', '1', '1', '2', 'C', '1', '2025-05-20 19:51:15');
 
 -- ----------------------------
 -- Table structure for edu_exercise_questions_correlation
@@ -378,7 +374,7 @@ CREATE TABLE `edu_exercise_questions_correlation` (
   KEY `question_id` (`question_id`),
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`) ON DELETE CASCADE,
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_questions_correlation
@@ -386,7 +382,8 @@ CREATE TABLE `edu_exercise_questions_correlation` (
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('5', '2', '1', '2', '2');
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('8', '2', '2', '3', '2');
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('12', '1', '1', '1', '2');
-INSERT INTO `edu_exercise_questions_correlation` VALUES ('30', '1', '2', '2', '0');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('30', '1', '2', '2', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('33', '2', '3', '1', '2');
 
 -- ----------------------------
 -- Table structure for edu_exercise_scores
@@ -400,18 +397,13 @@ CREATE TABLE `edu_exercise_scores` (
   `max_score` int NOT NULL,
   `completion_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`score_id`),
-  UNIQUE KEY `student_id` (`student_id`,`exercise_id`),
-  KEY `exercise_id` (`exercise_id`),
-  CONSTRAINT `edu_exercise_scores_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `student_id` (`student_id`,`exercise_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_scores
 -- ----------------------------
-INSERT INTO `edu_exercise_scores` VALUES ('2', '101', '1', '3.00', '5', '2025-05-14 19:08:17');
-INSERT INTO `edu_exercise_scores` VALUES ('4', '101', '2', '4.00', '4', '2025-05-15 23:40:30');
-INSERT INTO `edu_exercise_scores` VALUES ('12', '1', '1', '0.00', '10', '2025-05-16 00:21:22');
-INSERT INTO `edu_exercise_scores` VALUES ('14', '100', '1', '0.00', '2', '2025-05-20 11:34:04');
+INSERT INTO `edu_exercise_scores` VALUES ('12', '1', '1', '2.00', '4', '2025-05-20 19:51:15');
 
 -- ----------------------------
 -- Table structure for edu_student
@@ -1076,7 +1068,7 @@ CREATE TABLE `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=526 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=537 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1507,6 +1499,17 @@ INSERT INTO `sys_logininfor` VALUES ('522', '19838472634', '127.0.0.1', '内网I
 INSERT INTO `sys_logininfor` VALUES ('523', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 13:47:52');
 INSERT INTO `sys_logininfor` VALUES ('524', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 13:48:32');
 INSERT INTO `sys_logininfor` VALUES ('525', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 14:12:31');
+INSERT INTO `sys_logininfor` VALUES ('526', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-05-20 15:06:47');
+INSERT INTO `sys_logininfor` VALUES ('527', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 15:06:47');
+INSERT INTO `sys_logininfor` VALUES ('528', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 15:07:22');
+INSERT INTO `sys_logininfor` VALUES ('529', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-05-20 16:15:42');
+INSERT INTO `sys_logininfor` VALUES ('530', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 16:15:44');
+INSERT INTO `sys_logininfor` VALUES ('531', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 16:17:09');
+INSERT INTO `sys_logininfor` VALUES ('532', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 18:04:26');
+INSERT INTO `sys_logininfor` VALUES ('533', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-05-20 18:10:55');
+INSERT INTO `sys_logininfor` VALUES ('534', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 18:10:55');
+INSERT INTO `sys_logininfor` VALUES ('535', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 18:56:52');
+INSERT INTO `sys_logininfor` VALUES ('536', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 20:28:17');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1735,7 +1738,7 @@ CREATE TABLE `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=834 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2474,6 +2477,37 @@ INSERT INTO `sys_oper_log` VALUES ('830', '学生提交答案表', '1', 'com.nue
 INSERT INTO `sys_oper_log` VALUES ('831', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"params\":{},\"studentId\":100}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExercisesStudentAnswersMapper.insertEduExercisesStudentAnswers-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercises_student_answers          ( student_id )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\n; Field \'exercise_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value', '2025-05-20 14:13:27', '4');
 INSERT INTO `sys_oper_log` VALUES ('832', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"params\":{},\"studentId\":100}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExercisesStudentAnswersMapper.insertEduExercisesStudentAnswers-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercises_student_answers          ( student_id )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\n; Field \'exercise_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value', '2025-05-20 14:16:22', '4');
 INSERT INTO `sys_oper_log` VALUES ('833', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"params\":{},\"studentId\":100}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExercisesStudentAnswersMapper.insertEduExercisesStudentAnswers-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercises_student_answers          ( student_id )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value\n; Field \'exercise_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'exercise_id\' doesn\'t have a default value', '2025-05-20 14:16:33', '3');
+INSERT INTO `sys_oper_log` VALUES ('834', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"id\":33,\"params\":{},\"questionId\":3,\"questionOrder\":1,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 15:07:58', '23');
+INSERT INTO `sys_oper_log` VALUES ('835', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":27,\"exerciseId\":1,\"params\":{},\"questionId\":2,\"studentId\":100}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 16:17:27', '10');
+INSERT INTO `sys_oper_log` VALUES ('836', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/27', '127.0.0.1', '内网IP', '[27]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 16:17:50', '10');
+INSERT INTO `sys_oper_log` VALUES ('837', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/26', '127.0.0.1', '内网IP', '[26]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 16:17:54', '7');
+INSERT INTO `sys_oper_log` VALUES ('838', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', 'admin', '教研学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"answerId\":28,\"exerciseId\":1,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"a\",\"studentId\":100}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 16:41:29', '14');
+INSERT INTO `sys_oper_log` VALUES ('839', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"studentId\":100}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'question_id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExercisesStudentAnswersMapper.insertEduExercisesStudentAnswers-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercises_student_answers          ( student_id,             exercise_id )           values ( ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'question_id\' doesn\'t have a default value\n; Field \'question_id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'question_id\' doesn\'t have a default value', '2025-05-20 16:51:25', '3');
+INSERT INTO `sys_oper_log` VALUES ('840', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"A\",\"studentId\":100},{\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":100}]', null, '1', 'nested exception is org.apache.ibatis.binding.BindingException: Parameter \'answersList\' not found. Available parameters are [arg0, collection, list]', '2025-05-20 17:00:33', '11');
+INSERT INTO `sys_oper_log` VALUES ('841', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"A\",\"studentId\":100},{\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":100}]', null, '1', 'nested exception is org.apache.ibatis.binding.BindingException: Parameter \'answersList\' not found. Available parameters are [arg0, collection, list]', '2025-05-20 17:01:03', '1');
+INSERT INTO `sys_oper_log` VALUES ('842', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"A\",\"studentId\":100},{\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 17:07:01', '104');
+INSERT INTO `sys_oper_log` VALUES ('843', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 17:09:15.05\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 17:09:15.05\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"D\",\"studentId\":100}]', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-1-1\' for key \'edu_exercises_student_answers.student_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO edu_exercises_student_answers     (student_id, exercise_id,question_id, selected_answer, answer_time)     VALUES                (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-1-1\' for key \'edu_exercises_student_answers.student_id\'\n; Duplicate entry \'100-1-1\' for key \'edu_exercises_student_answers.student_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-1-1\' for key \'edu_exercises_student_answers.student_id\'', '2025-05-20 17:09:15', '69');
+INSERT INTO `sys_oper_log` VALUES ('844', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 17:09:44.832\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 17:09:44.832\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"D\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 17:09:45', '9');
+INSERT INTO `sys_oper_log` VALUES ('845', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 17:10:12.332\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"B\",\"studentId\":100},{\"answerTime\":\"2025-05-20 17:10:12.332\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 17:10:12', '9');
+INSERT INTO `sys_oper_log` VALUES ('846', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:11:07.156\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:11:07.156\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:11:07', '10');
+INSERT INTO `sys_oper_log` VALUES ('847', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:12:21.889\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:12:21.889\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:12:22', '8');
+INSERT INTO `sys_oper_log` VALUES ('848', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:24:37.83\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:24:37.83\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:24:38', '9');
+INSERT INTO `sys_oper_log` VALUES ('849', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:29:42.964\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:29:42.964\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:29:43', '9');
+INSERT INTO `sys_oper_log` VALUES ('850', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:33:41.599\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:33:41.599\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:33:41', '8');
+INSERT INTO `sys_oper_log` VALUES ('851', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:56:59.785\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:56:59.785\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:57:00', '7');
+INSERT INTO `sys_oper_log` VALUES ('852', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:57:31.891\",\"exerciseId\":2,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:57:31.891\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:57:31.891\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"C\",\"studentId\":100}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 18:57:32', '8');
+INSERT INTO `sys_oper_log` VALUES ('853', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:58:00.704\",\"exerciseId\":2,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:58:00.704\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:58:00.704\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"C\",\"studentId\":100}]', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO edu_exercises_student_answers     (student_id, exercise_id,question_id, selected_answer, answer_time)     VALUES                (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'\n; Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'', '2025-05-20 18:58:01', '7');
+INSERT INTO `sys_oper_log` VALUES ('854', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 18:58:14.343\",\"exerciseId\":2,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:58:14.343\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":100},{\"answerTime\":\"2025-05-20 18:58:14.343\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"C\",\"studentId\":100}]', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO edu_exercises_student_answers     (student_id, exercise_id,question_id, selected_answer, answer_time)     VALUES                (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'\n; Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'100-2-1\' for key \'edu_exercises_student_answers.student_id\'', '2025-05-20 18:58:14', '6');
+INSERT INTO `sys_oper_log` VALUES ('855', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 19:11:33.312\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":1},{\"answerTime\":\"2025-05-20 19:11:33.312\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:11:33', '6');
+INSERT INTO `sys_oper_log` VALUES ('856', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 19:40:48.342\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":1},{\"answerTime\":\"2025-05-20 19:40:48.342\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:40:48', '8');
+INSERT INTO `sys_oper_log` VALUES ('857', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-17 00:00:00\",\"description\":\"1\",\"exerciseId\":9,\"params\":{},\"status\":0,\"submissionTime\":\"2025-05-17\",\"timeLimit\":120,\"title\":\"1\",\"userId\":100}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:46:21', '17');
+INSERT INTO `sys_oper_log` VALUES ('858', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 19:51:15.291\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":1},{\"answerTime\":\"2025-05-20 19:51:15.291\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:51:15', '7');
+INSERT INTO `sys_oper_log` VALUES ('859', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:51:15', '5');
+INSERT INTO `sys_oper_log` VALUES ('860', '练习集合', '1', 'com.nuex.edu.controller.EduExercisesController.add()', 'POST', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-20 00:00:00\",\"description\":\"12\",\"exerciseId\":11,\"params\":{},\"status\":1,\"submissionTime\":\"2025-05-20\",\"timeLimit\":120,\"title\":\"12\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:57:00', '13');
+INSERT INTO `sys_oper_log` VALUES ('861', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/11', '127.0.0.1', '内网IP', '[11]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:57:29', '8');
+INSERT INTO `sys_oper_log` VALUES ('862', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-14 19:00:55\",\"description\":\"测试数据库基础知识\",\"exerciseId\":1,\"params\":{},\"status\":0,\"submissionTime\":\"2023-06-01\",\"timeLimit\":30,\"title\":\"数据库基础测试\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:57:34', '7');
+INSERT INTO `sys_oper_log` VALUES ('863', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 20:10:12.232\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":1},{\"answerTime\":\"2025-05-20 20:10:12.232\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":1}]', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO edu_exercises_student_answers     (student_id, exercise_id,question_id, selected_answer, answer_time)     VALUES                (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'\n; Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'', '2025-05-20 20:10:12', '7');
+INSERT INTO `sys_oper_log` VALUES ('864', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 20:10:12', '5');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2785,9 +2819,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-20 13:47:52', 'admin', '2025-04-01 23:43:35', '', '2025-05-20 13:47:52', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-20 18:04:27', 'admin', '2025-04-01 23:43:35', '', '2025-05-20 18:04:26', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2025-04-01 23:43:35', 'admin', '2025-04-01 23:43:35', '', null, '测试员');
-INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-05-20 14:12:31', 'admin', '2025-04-14 15:27:10', 'admin', '2025-05-20 14:12:31', '测试');
+INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-05-20 20:28:17', 'admin', '2025-04-14 15:27:10', 'admin', '2025-05-20 20:28:17', '测试');
 INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$0DjMqOb8WABfmdR4q8nWKuYqtAz1b/miABoBXmZ4V8hRDrPSmT4/a', '0', '0', '127.0.0.1', '2025-04-18 14:18:59', 'admin', '2025-04-14 21:47:43', 'admin', '2025-04-18 14:18:58', null);
 
 -- ----------------------------
@@ -2823,6 +2857,71 @@ CREATE TABLE `sys_user_role` (
 INSERT INTO `sys_user_role` VALUES ('1', '1');
 INSERT INTO `sys_user_role` VALUES ('100', '101');
 INSERT INTO `sys_user_role` VALUES ('101', '101');
+
+-- ----------------------------
+-- Procedure structure for batch_insert_answers
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `batch_insert_answers`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `batch_insert_answers`(
+    IN p_student_id BIGINT,
+    IN p_exercise_id INT,
+    IN p_answers JSON
+)
+BEGIN
+    DECLARE i INT DEFAULT 0;
+    DECLARE count INT;
+    DECLARE q_id INT;
+    DECLARE answer CHAR(1);
+    
+    -- 创建临时表存储批量数据
+    CREATE TEMPORARY TABLE IF NOT EXISTS temp_answers (
+        question_id INT,
+        selected_answer CHAR(1)
+    );
+    
+    -- 清空临时表
+    TRUNCATE TABLE temp_answers;
+    
+    -- 解析JSON到临时表
+    SET count = JSON_LENGTH(p_answers);
+    WHILE i < count DO
+        SET q_id = JSON_EXTRACT(p_answers, CONCAT('$[', i, '].question_id'));
+        SET answer = JSON_EXTRACT(p_answers, CONCAT('$[', i, '].selected_answer'));
+        
+        INSERT INTO temp_answers VALUES (q_id, answer);
+        SET i = i + 1;
+    END WHILE;
+    
+    -- 批量插入到主表
+    INSERT INTO edu_exercises_student_answers 
+    (student_id, exercise_id, question_id, selected_answer)
+    SELECT p_student_id, p_exercise_id, question_id, selected_answer
+    FROM temp_answers;
+    
+    -- 显式计算分数
+    CALL update_exercise_scores(p_student_id, p_exercise_id);
+    
+    -- 清理临时表
+    DROP TEMPORARY TABLE IF EXISTS temp_answers;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for update_exercise_scores
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `update_exercise_scores`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_exercise_scores`(
+    IN p_student_id BIGINT,
+    IN p_exercise_id INT
+)
+BEGIN
+    -- 同前面的计算逻辑
+END
+;;
+DELIMITER ;
 DROP TRIGGER IF EXISTS `check_answer_correctness`;
 DELIMITER ;;
 CREATE TRIGGER `check_answer_correctness` BEFORE INSERT ON `edu_exercises_student_answers` FOR EACH ROW BEGIN
@@ -2837,27 +2936,23 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `update_exercise_score`;
 DELIMITER ;;
 CREATE TRIGGER `update_exercise_score` AFTER INSERT ON `edu_exercises_student_answers` FOR EACH ROW BEGIN
-    DECLARE v_total_score DECIMAL(5,2);
-    DECLARE v_max_score INT;
+    -- 先删除旧的统计记录
+    DELETE FROM edu_exercise_scores 
+    WHERE student_id = NEW.student_id AND exercise_id = NEW.exercise_id;
     
-    -- 计算当前得分
-    SELECT IFNULL(SUM(CASE WHEN sa.is_correct THEN eq.score ELSE 0 END), 0)
-    INTO v_total_score
+    -- 重新计算总分
+    INSERT INTO edu_exercise_scores (student_id, exercise_id, total_score, max_score)
+    SELECT 
+        sa.student_id,
+        sa.exercise_id,
+        IFNULL(SUM(CASE WHEN sa.is_correct THEN eq.score ELSE 0 END), 0) AS total_score,
+        IFNULL(SUM(eq.score), 0) AS max_score
     FROM edu_exercises_student_answers sa
     JOIN edu_exercise_questions_correlation eq ON eq.question_id = sa.question_id 
-                                AND eq.exercise_id = sa.exercise_id
+                            AND eq.exercise_id = sa.exercise_id
     WHERE sa.student_id = NEW.student_id
-    AND sa.exercise_id = NEW.exercise_id;
-    -- 计算练习总分(所有关联题目的分数总和)
-    SELECT IFNULL(SUM(score), 0)
-    INTO v_max_score
-    FROM edu_exercise_questions_correlation
-    WHERE exercise_id = NEW.exercise_id;
-    -- 更新或插入成绩表
-    INSERT INTO edu_exercise_scores (student_id, exercise_id, total_score, max_score)
-    VALUES (NEW.student_id, NEW.exercise_id,  v_total_score, v_max_score)
-    ON DUPLICATE KEY UPDATE total_score = v_total_score,
-        max_score = v_max_score;
+    AND sa.exercise_id = NEW.exercise_id
+    GROUP BY sa.student_id, sa.exercise_id;
 END
 ;;
 DELIMITER ;
