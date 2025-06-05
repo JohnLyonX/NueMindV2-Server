@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="url != null  and url != ''"> and url = #{url}</if>
             <if test="summary != null  and summary != ''"> and summary = #{summary}</if>
             <if test="price != null "> and price = #{price}</if>
-            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="status != null  "> and status = #{status}</if>
             <if test="teacherName != null and teacherName != ''">teacher_name</if>
             <if test="progress != null and progress != ''">progress</if>
         </where>
