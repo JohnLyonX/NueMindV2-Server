@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="课程编号" prop="coursesId">
+      <el-form-item label="编号" prop="id">
         <el-input
-          v-model="queryParams.coursesId"
-          placeholder="请输入课程编号"
+          v-model="queryParams.id"
+          placeholder="请输入编号"
           clearable
           @keyup.enter.native="handleQuery"
         />
@@ -137,7 +137,7 @@
         <el-form-item label="课程名称" prop="coursesName">
           <el-select
             v-model="form.coursesName"
-            placeholder="请选择课程名称"
+            placeholder="请选择课程名称(可为空)"
             clearable
             filterable
             style="width: 100%"
@@ -214,6 +214,7 @@ export default {
         queryParams: {
         pageNum: 1,
         pageSize: 10,
+        id:null,
         coursesId: null,
         coursesName: null,
         coursesChapterName: null,
@@ -227,11 +228,15 @@ export default {
       // 表单校验
       rules: {
         name: [
-          { required: true, message: "课程考试名称不能为空", trigger: "blur" }
+          { required: true, message: "考试名称不能为空", trigger: "blur" }
         ],
-        deptId: [
-          { required: true, message: "请选择所属部门", trigger: "change" }
-        ]
+        // deptId: [
+        //   { required: true, message: "请选择所属部门", trigger: "change" }
+        // ]
+        fileUrl:[
+          {required: true, message: "试卷不能为空", trigger: "blur"}
+        ],
+
       },
 
     };
