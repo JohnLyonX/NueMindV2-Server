@@ -122,4 +122,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ( #{item.id}, #{item.studentId}, #{item.school}, #{item.major}, #{item.grade}, #{item.classinfo}, #{item.age}, #{item.sex}, #{item.email}, #{item.codeAbility}, #{item.studyAbility}, #{item.thinkingAbility}, #{item.createTime}, #{item.updateTime})
         </foreach>
     </insert>
+  <select id="selectStudentByPhoneNumber" parameterType="string" resultMap="EduStudentEduStudentDetailsResult">
+    SELECT
+        s.id, s.name, s.url, s.phone_number, s.password, s.create_time, s.update_time,
+        d.id AS detailId, d.student_id, d.school, d.major, d.grade, d.classinfo, d.age, d.sex, d.email, d.code_ability, d.study_ability, d.thinking_ability, d.create_time AS detailCreateTime, d.update_time AS detailUpdateTime
+    FROM edu_student s
+    LEFT JOIN edu_student_details d ON s.id = d.student_id
+    WHERE s.phone_number = #{username}
+</select>
+
+
+
+
 </mapper>

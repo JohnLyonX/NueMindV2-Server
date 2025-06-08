@@ -131,4 +131,16 @@ public class EduStudentServiceImpl implements IEduStudentService
             }
         }
     }
+
+    /**
+     * 根据手机号查询学生信息
+     *
+     * @param username 手机号（用户名）
+     * @return 学生基本信息
+     */
+    @Override
+    public EduStudent selectStudentByPhoneNumber(String username) {
+        return eduStudentMapper.selectStudentByPhoneNumber(username);
+    }
+
 }

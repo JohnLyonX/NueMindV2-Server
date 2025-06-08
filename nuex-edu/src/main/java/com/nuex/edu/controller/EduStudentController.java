@@ -2,6 +2,9 @@ package com.nuex.edu.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.nuex.common.core.domain.model.LoginUser;
+import com.nuex.common.utils.SecurityUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -101,4 +104,16 @@ public class EduStudentController extends BaseController
     {
         return toAjax(eduStudentService.deleteEduStudentByIds(ids));
     }
+    @GetMapping("/getCurrentStudentInfo")
+    public AjaxResult getCurrentStudentInfo() {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+        String username = loginUser.getUsername();
+
+        EduStudent student = eduStudentService.selectStudentByPhoneNumber(username);
+        if (student == null) {
+            return AjaxResult.error("未找到对应学生信息");
+        }
+        return AjaxResult.success(student);
+    }
+
 }

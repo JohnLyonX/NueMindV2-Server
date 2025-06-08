@@ -123,7 +123,7 @@
           <el-input v-model="form.name" placeholder="请输入学生名字" />
         </el-form-item>
          <el-form-item label="用户头像" prop="url">
-          <image-upload v-model="form.url"/>
+          <image-upload v-model="form.url" limit="1"/>
         </el-form-item>
         <el-form-item label="登陆账号" prop="phoneNumber">
           <el-input v-model="form.phoneNumber" placeholder="请输入登陆账号" />
