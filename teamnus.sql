@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80040
 File Encoding         : 65001
 
-Date: 2025-05-20 20:32:43
+Date: 2025-08-02 20:47:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -260,9 +260,6 @@ CREATE TABLE `edu_exam_filelib` (
 -- ----------------------------
 -- Records of edu_exam_filelib
 -- ----------------------------
-INSERT INTO `edu_exam_filelib` VALUES ('52', '0000000001', '张三', 'Java面向对象编程', null, null, 'Java章节测试一', 'http://localhost:8080/profile/upload/2025/04/25/张三Java基础期末考试试卷 _20250425200008A001.docx', 'http://localhost:8080/profile/upload/2025/04/25/批改完成张三Java基础期末考试试卷 _20250425200008A001.docx', null, '0');
-INSERT INTO `edu_exam_filelib` VALUES ('53', '0000000001', '张三', 'Java面向对象编程', null, null, 'Java章节测试一', 'http://localhost:8080/profile/upload/2025/04/25/Java基础期末考试试卷_20250425200352A001.docx', null, null, '0');
-INSERT INTO `edu_exam_filelib` VALUES ('54', '0000000001', '张三', 'Java面向对象编程', null, null, 'Java章节测试一', '/profile/upload/2025/04/25/张三Java基础期末考试试卷 _20250425200532A002.docx', '/profile/upload/2025/04/25/批改完成张三Java基础期末考试试卷 _20250425200532A002.docx', null, '0');
 
 -- ----------------------------
 -- Table structure for edu_exam_task
@@ -351,7 +348,7 @@ CREATE TABLE `edu_exercises_student_answers` (
   CONSTRAINT `edu_exercises_student_answers_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`),
   CONSTRAINT `edu_exercises_student_answers_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`),
   CONSTRAINT `edu_exercises_student_answers_chk_1` CHECK ((`selected_answer` in (_utf8mb4'A',_utf8mb4'B',_utf8mb4'C',_utf8mb4'D')))
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises_student_answers
@@ -424,8 +421,8 @@ CREATE TABLE `edu_student` (
 -- ----------------------------
 -- Records of edu_student
 -- ----------------------------
-INSERT INTO `edu_student` VALUES ('1', 'https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/aw.png', '张三', '19838472634', 'admin123123', null, '2025-04-25 11:43:33', '100');
-INSERT INTO `edu_student` VALUES ('101', 'null', '李四', '18273826345', '123123', null, null, null);
+INSERT INTO `edu_student` VALUES ('1', '/profile/upload/2025/06/07/aw_20250607170102A003.png', '张三', '19838472634', 'admin123123', null, '2025-06-07 17:01:04', '100');
+INSERT INTO `edu_student` VALUES ('101', '/profile/upload/2025/06/07/123333_20250607161903A002.jpg', '李四', '13345678910', 'admin123', null, '2025-06-07 16:45:16', null);
 
 -- ----------------------------
 -- Table structure for edu_student_details
@@ -447,13 +444,14 @@ CREATE TABLE `edu_student_details` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COMMENT='学生信息详情';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COMMENT='学生信息详情';
 
 -- ----------------------------
 -- Records of edu_student_details
 -- ----------------------------
 INSERT INTO `edu_student_details` VALUES ('1', '1', '清华大学', '计算机科学', '22级', '计算机科学2班', '20', '男', 'test@gmail.com', '80', '20', '60', '2025-04-08 20:51:15', '2025-04-08 20:51:17');
 INSERT INTO `edu_student_details` VALUES ('2', '2', '广州大学', '计算机科学与技术', '2024级', ' 计科2班', '20', '', 'example@nuexedu.com', '25', '60', '75', null, null);
+INSERT INTO `edu_student_details` VALUES ('3', '101', '波士顿大学', '数字媒体艺术', '2025', '2', '20', '', 'xxxxxx@qq.com', '12', '32', '44', null, null);
 
 -- ----------------------------
 -- Table structure for edu_student_myexam
@@ -503,7 +501,7 @@ CREATE TABLE `gen_table` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表';
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表';
 
 -- ----------------------------
 -- Records of gen_table
@@ -548,7 +546,7 @@ CREATE TABLE `gen_table_column` (
   `update_by` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '' COMMENT '更新者',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=266 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表字段';
+) ENGINE=InnoDB AUTO_INCREMENT=280 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表字段';
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -1068,7 +1066,7 @@ CREATE TABLE `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=537 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=678 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1510,6 +1508,147 @@ INSERT INTO `sys_logininfor` VALUES ('533', '19838472634', '127.0.0.1', '内网I
 INSERT INTO `sys_logininfor` VALUES ('534', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 18:10:55');
 INSERT INTO `sys_logininfor` VALUES ('535', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 18:56:52');
 INSERT INTO `sys_logininfor` VALUES ('536', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 20:28:17');
+INSERT INTO `sys_logininfor` VALUES ('537', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-20 20:40:55');
+INSERT INTO `sys_logininfor` VALUES ('538', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-21 11:11:10');
+INSERT INTO `sys_logininfor` VALUES ('539', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-05-21 11:53:19');
+INSERT INTO `sys_logininfor` VALUES ('540', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-05 22:56:47');
+INSERT INTO `sys_logininfor` VALUES ('541', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-05 22:56:52');
+INSERT INTO `sys_logininfor` VALUES ('542', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-05 22:56:56');
+INSERT INTO `sys_logininfor` VALUES ('543', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-05 22:58:14');
+INSERT INTO `sys_logininfor` VALUES ('544', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-06 18:36:43');
+INSERT INTO `sys_logininfor` VALUES ('545', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:38:18');
+INSERT INTO `sys_logininfor` VALUES ('546', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:38:18');
+INSERT INTO `sys_logininfor` VALUES ('547', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-06 18:38:20');
+INSERT INTO `sys_logininfor` VALUES ('548', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:38:21');
+INSERT INTO `sys_logininfor` VALUES ('549', '18273826345', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:38:44');
+INSERT INTO `sys_logininfor` VALUES ('550', '18273826345', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:39:02');
+INSERT INTO `sys_logininfor` VALUES ('551', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:39:18');
+INSERT INTO `sys_logininfor` VALUES ('552', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:39:26');
+INSERT INTO `sys_logininfor` VALUES ('553', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:39:29');
+INSERT INTO `sys_logininfor` VALUES ('554', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:39:31');
+INSERT INTO `sys_logininfor` VALUES ('555', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:40:50');
+INSERT INTO `sys_logininfor` VALUES ('556', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:41:04');
+INSERT INTO `sys_logininfor` VALUES ('557', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:41:04');
+INSERT INTO `sys_logininfor` VALUES ('558', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:41:07');
+INSERT INTO `sys_logininfor` VALUES ('559', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:41:31');
+INSERT INTO `sys_logininfor` VALUES ('560', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '密码输入错误5次，帐户锁定10分钟', '2025-06-06 18:41:43');
+INSERT INTO `sys_logininfor` VALUES ('561', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:19');
+INSERT INTO `sys_logininfor` VALUES ('562', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:19');
+INSERT INTO `sys_logininfor` VALUES ('563', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:21');
+INSERT INTO `sys_logininfor` VALUES ('564', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-06 18:48:22');
+INSERT INTO `sys_logininfor` VALUES ('565', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '密码输入错误5次，帐户锁定1分钟', '2025-06-06 18:48:35');
+INSERT INTO `sys_logininfor` VALUES ('566', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:35');
+INSERT INTO `sys_logininfor` VALUES ('567', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:48:37');
+INSERT INTO `sys_logininfor` VALUES ('568', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:37');
+INSERT INTO `sys_logininfor` VALUES ('569', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '密码输入错误5次，帐户锁定1分钟', '2025-06-06 18:48:46');
+INSERT INTO `sys_logininfor` VALUES ('570', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:47');
+INSERT INTO `sys_logininfor` VALUES ('571', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-06 18:48:49');
+INSERT INTO `sys_logininfor` VALUES ('572', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:50');
+INSERT INTO `sys_logininfor` VALUES ('573', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '密码输入错误5次，帐户锁定1分钟', '2025-06-06 18:48:52');
+INSERT INTO `sys_logininfor` VALUES ('574', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:48:52');
+INSERT INTO `sys_logininfor` VALUES ('575', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '密码输入错误5次，帐户锁定1分钟', '2025-06-06 18:49:01');
+INSERT INTO `sys_logininfor` VALUES ('576', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:49:30');
+INSERT INTO `sys_logininfor` VALUES ('577', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:49:30');
+INSERT INTO `sys_logininfor` VALUES ('578', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:49:33');
+INSERT INTO `sys_logininfor` VALUES ('579', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-06 18:49:33');
+INSERT INTO `sys_logininfor` VALUES ('580', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-06 18:51:51');
+INSERT INTO `sys_logininfor` VALUES ('581', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-06 18:51:54');
+INSERT INTO `sys_logininfor` VALUES ('582', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 15:50:44');
+INSERT INTO `sys_logininfor` VALUES ('583', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 16:55:11');
+INSERT INTO `sys_logininfor` VALUES ('584', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 16:55:11');
+INSERT INTO `sys_logininfor` VALUES ('585', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 16:55:13');
+INSERT INTO `sys_logininfor` VALUES ('586', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 16:55:13');
+INSERT INTO `sys_logininfor` VALUES ('587', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 16:57:47');
+INSERT INTO `sys_logininfor` VALUES ('588', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 16:57:53');
+INSERT INTO `sys_logininfor` VALUES ('589', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 17:01:26');
+INSERT INTO `sys_logininfor` VALUES ('590', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:01:26');
+INSERT INTO `sys_logininfor` VALUES ('591', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-07 17:12:50');
+INSERT INTO `sys_logininfor` VALUES ('592', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:12:52');
+INSERT INTO `sys_logininfor` VALUES ('593', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:14:07');
+INSERT INTO `sys_logininfor` VALUES ('594', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:15:19');
+INSERT INTO `sys_logininfor` VALUES ('595', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:18:59');
+INSERT INTO `sys_logininfor` VALUES ('596', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 17:18:59');
+INSERT INTO `sys_logininfor` VALUES ('597', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 17:19:46');
+INSERT INTO `sys_logininfor` VALUES ('598', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:19:46');
+INSERT INTO `sys_logininfor` VALUES ('599', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 17:19:58');
+INSERT INTO `sys_logininfor` VALUES ('600', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:19:58');
+INSERT INTO `sys_logininfor` VALUES ('601', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-07 17:24:49');
+INSERT INTO `sys_logininfor` VALUES ('602', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-07 17:24:49');
+INSERT INTO `sys_logininfor` VALUES ('603', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 09:28:27');
+INSERT INTO `sys_logininfor` VALUES ('604', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:28:28');
+INSERT INTO `sys_logininfor` VALUES ('605', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 09:28:54');
+INSERT INTO `sys_logininfor` VALUES ('606', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:28:55');
+INSERT INTO `sys_logininfor` VALUES ('607', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:31:33');
+INSERT INTO `sys_logininfor` VALUES ('608', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:31:55');
+INSERT INTO `sys_logininfor` VALUES ('609', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:32:13');
+INSERT INTO `sys_logininfor` VALUES ('610', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:33:53');
+INSERT INTO `sys_logininfor` VALUES ('611', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-08 09:34:13');
+INSERT INTO `sys_logininfor` VALUES ('612', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:34:17');
+INSERT INTO `sys_logininfor` VALUES ('613', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:36:31');
+INSERT INTO `sys_logininfor` VALUES ('614', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 09:39:56');
+INSERT INTO `sys_logininfor` VALUES ('615', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:40:00');
+INSERT INTO `sys_logininfor` VALUES ('616', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:53:20');
+INSERT INTO `sys_logininfor` VALUES ('617', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 09:56:20');
+INSERT INTO `sys_logininfor` VALUES ('618', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 09:56:20');
+INSERT INTO `sys_logininfor` VALUES ('619', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:03:13');
+INSERT INTO `sys_logininfor` VALUES ('620', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:05:00');
+INSERT INTO `sys_logininfor` VALUES ('621', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 10:05:43');
+INSERT INTO `sys_logininfor` VALUES ('622', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:05:46');
+INSERT INTO `sys_logininfor` VALUES ('623', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 10:05:59');
+INSERT INTO `sys_logininfor` VALUES ('624', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-08 10:05:59');
+INSERT INTO `sys_logininfor` VALUES ('625', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:06:06');
+INSERT INTO `sys_logininfor` VALUES ('626', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 10:09:09');
+INSERT INTO `sys_logininfor` VALUES ('627', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:09:10');
+INSERT INTO `sys_logininfor` VALUES ('628', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:15:42');
+INSERT INTO `sys_logininfor` VALUES ('629', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:20:37');
+INSERT INTO `sys_logininfor` VALUES ('630', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 10:20:37');
+INSERT INTO `sys_logininfor` VALUES ('631', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 10:35:08');
+INSERT INTO `sys_logininfor` VALUES ('632', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:00:00');
+INSERT INTO `sys_logininfor` VALUES ('633', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:00:00');
+INSERT INTO `sys_logininfor` VALUES ('634', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:05:44');
+INSERT INTO `sys_logininfor` VALUES ('635', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:05:44');
+INSERT INTO `sys_logininfor` VALUES ('636', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:08:56');
+INSERT INTO `sys_logininfor` VALUES ('637', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:08:56');
+INSERT INTO `sys_logininfor` VALUES ('638', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:18:08');
+INSERT INTO `sys_logininfor` VALUES ('639', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:18:08');
+INSERT INTO `sys_logininfor` VALUES ('640', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:18:29');
+INSERT INTO `sys_logininfor` VALUES ('641', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:18:29');
+INSERT INTO `sys_logininfor` VALUES ('642', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:29:40');
+INSERT INTO `sys_logininfor` VALUES ('643', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-06-08 11:38:33');
+INSERT INTO `sys_logininfor` VALUES ('644', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:38:33');
+INSERT INTO `sys_logininfor` VALUES ('645', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:38:37');
+INSERT INTO `sys_logininfor` VALUES ('646', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:38:37');
+INSERT INTO `sys_logininfor` VALUES ('647', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:42:41');
+INSERT INTO `sys_logininfor` VALUES ('648', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:42:41');
+INSERT INTO `sys_logininfor` VALUES ('649', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:44:29');
+INSERT INTO `sys_logininfor` VALUES ('650', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:44:29');
+INSERT INTO `sys_logininfor` VALUES ('651', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:45:10');
+INSERT INTO `sys_logininfor` VALUES ('652', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:45:10');
+INSERT INTO `sys_logininfor` VALUES ('653', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:45:22');
+INSERT INTO `sys_logininfor` VALUES ('654', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-08 11:45:22');
+INSERT INTO `sys_logininfor` VALUES ('655', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-08 11:45:26');
+INSERT INTO `sys_logininfor` VALUES ('656', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:45:26');
+INSERT INTO `sys_logininfor` VALUES ('657', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 11:45:32');
+INSERT INTO `sys_logininfor` VALUES ('658', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 11:45:32');
+INSERT INTO `sys_logininfor` VALUES ('659', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 12:35:53');
+INSERT INTO `sys_logininfor` VALUES ('660', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 12:35:54');
+INSERT INTO `sys_logininfor` VALUES ('661', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 12:39:46');
+INSERT INTO `sys_logininfor` VALUES ('662', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 13:14:16');
+INSERT INTO `sys_logininfor` VALUES ('663', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 13:14:16');
+INSERT INTO `sys_logininfor` VALUES ('664', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 13:15:33');
+INSERT INTO `sys_logininfor` VALUES ('665', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 13:15:46');
+INSERT INTO `sys_logininfor` VALUES ('666', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-08 13:15:46');
+INSERT INTO `sys_logininfor` VALUES ('667', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-08 13:15:49');
+INSERT INTO `sys_logininfor` VALUES ('668', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 13:15:49');
+INSERT INTO `sys_logininfor` VALUES ('669', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 13:15:57');
+INSERT INTO `sys_logininfor` VALUES ('670', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 13:44:26');
+INSERT INTO `sys_logininfor` VALUES ('671', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 13:44:26');
+INSERT INTO `sys_logininfor` VALUES ('672', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码已失效', '2025-06-08 13:47:52');
+INSERT INTO `sys_logininfor` VALUES ('673', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-08 13:47:52');
+INSERT INTO `sys_logininfor` VALUES ('674', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-25 19:54:40');
+INSERT INTO `sys_logininfor` VALUES ('675', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-25 19:56:19');
+INSERT INTO `sys_logininfor` VALUES ('676', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-25 19:56:31');
+INSERT INTO `sys_logininfor` VALUES ('677', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-07-31 21:02:18');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1738,7 +1877,7 @@ CREATE TABLE `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=878 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2508,6 +2647,19 @@ INSERT INTO `sys_oper_log` VALUES ('861', '练习集合', '3', 'com.nuex.edu.con
 INSERT INTO `sys_oper_log` VALUES ('862', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-14 19:00:55\",\"description\":\"测试数据库基础知识\",\"exerciseId\":1,\"params\":{},\"status\":0,\"submissionTime\":\"2023-06-01\",\"timeLimit\":30,\"title\":\"数据库基础测试\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 19:57:34', '7');
 INSERT INTO `sys_oper_log` VALUES ('863', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-05-20 20:10:12.232\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"C\",\"studentId\":1},{\"answerTime\":\"2025-05-20 20:10:12.232\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"C\",\"studentId\":1}]', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExercisesStudentAnswersMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: INSERT INTO edu_exercises_student_answers     (student_id, exercise_id,question_id, selected_answer, answer_time)     VALUES                (?, ?, ?, ?, ?)      ,          (?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'\n; Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'1-1-1\' for key \'edu_exercises_student_answers.student_id\'', '2025-05-20 20:10:12', '7');
 INSERT INTO `sys_oper_log` VALUES ('864', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-05-20 20:10:12', '5');
+INSERT INTO `sys_oper_log` VALUES ('865', '课程考试', '1', 'com.nuex.edu.controller.EduCoursesExamController.add()', 'POST', '1', 'admin', '教研学院', '/edu/coursesExam', '127.0.0.1', '内网IP', '{\"name\":\"12\",\"params\":{}}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'file_url\' doesn\'t have a default value\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduCoursesExamMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduCoursesExamMapper.insertEduCoursesExam-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_courses_exam          ( name )           values ( ? )\r\n### Cause: java.sql.SQLException: Field \'file_url\' doesn\'t have a default value\n; Field \'file_url\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'file_url\' doesn\'t have a default value', '2025-06-05 23:05:14', '59');
+INSERT INTO `sys_oper_log` VALUES ('866', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"classinfo\":\"\",\"email\":\"\",\"grade\":\"\",\"major\":\"\",\"params\":{},\"school\":\"\",\"sex\":\"\",\"studentId\":101}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"18273826345\",\"updateTime\":\"2025-06-06 18:37:39\",\"url\":\"/profile/upload/2025/06/06/12_20250606183723A001.png,/profile/upload/2025/06/06/13_20250606183731A002.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-06 18:37:39', '28');
+INSERT INTO `sys_oper_log` VALUES ('867', '用户管理', '2', 'com.nuex.web.controller.system.SysUserController.resetPwd()', 'PUT', '1', 'admin', '教研学院', '/system/user/resetPwd', '127.0.0.1', '内网IP', '{\"admin\":false,\"params\":{},\"updateBy\":\"admin\",\"userId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-06 18:41:56', '68');
+INSERT INTO `sys_oper_log` VALUES ('868', '用户管理', '2', 'com.nuex.web.controller.system.SysUserController.resetPwd()', 'PUT', '1', 'admin', '教研学院', '/system/user/resetPwd', '127.0.0.1', '内网IP', '{\"admin\":false,\"params\":{},\"updateBy\":\"admin\",\"userId\":101}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-06 18:51:42', '91');
+INSERT INTO `sys_oper_log` VALUES ('869', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-06 18:55:46\",\"url\":\"/profile/upload/2025/06/06/12_20250606183723A001.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-06 18:55:46', '23');
+INSERT INTO `sys_oper_log` VALUES ('870', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-06 19:01:55\",\"url\":\"/profile/upload/2025/06/06/12_20250606183723A001.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-06 19:01:55', '14');
+INSERT INTO `sys_oper_log` VALUES ('871', '考试试卷提交与修改', '3', 'com.nuex.edu.controller.EduExamFilelibController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/examFilelib/52,53,54', '127.0.0.1', '内网IP', '[52,53,54]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 15:58:22', '15');
+INSERT INTO `sys_oper_log` VALUES ('872', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-07 16:16:47\",\"url\":\"/profile/upload/2025/06/06/12_20250606183723A001.png,/profile/upload/2025/06/07/123333_20250607161640A001.jpg\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:16:47', '34');
+INSERT INTO `sys_oper_log` VALUES ('873', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-07 16:19:04\",\"url\":\"/profile/upload/2025/06/07/123333_20250607161903A002.jpg\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:19:04', '9');
+INSERT INTO `sys_oper_log` VALUES ('874', '代码生成', '6', 'com.nuex.generator.controller.GenController.importTableSave()', 'POST', '1', 'admin', '教研学院', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":\"sys_role\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:21:31', '69');
+INSERT INTO `sys_oper_log` VALUES ('875', '代码生成', '3', 'com.nuex.generator.controller.GenController.remove()', 'DELETE', '1', 'admin', '教研学院', '/tool/gen/41', '127.0.0.1', '内网IP', '[41]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:21:34', '9');
+INSERT INTO `sys_oper_log` VALUES ('876', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿大学\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-07 16:45:15\",\"url\":\"/profile/upload/2025/06/07/123333_20250607161903A002.jpg\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:45:15', '10');
+INSERT INTO `sys_oper_log` VALUES ('877', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"计算机科学2班\",\"codeAbility\":80,\"createTime\":\"2025-04-08 20:51:15\",\"email\":\"test@gmail.com\",\"grade\":\"22级\",\"id\":1,\"major\":\"计算机科学\",\"params\":{},\"school\":\"清华大学\",\"sex\":\"男\",\"studentId\":1,\"studyAbility\":20,\"thinkingAbility\":60,\"updateTime\":\"2025-04-08 20:51:17\"}],\"id\":1,\"name\":\"张三\",\"params\":{},\"phoneNumber\":\"19838472634\",\"updateTime\":\"2025-06-07 17:01:04\",\"url\":\"/profile/upload/2025/06/07/aw_20250607170102A003.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 17:01:04', '11');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2819,10 +2971,10 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-05-20 18:04:27', 'admin', '2025-04-01 23:43:35', '', '2025-05-20 18:04:26', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-06-08 13:15:33', 'admin', '2025-04-01 23:43:35', '', '2025-06-08 13:15:33', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2025-04-01 23:43:35', 'admin', '2025-04-01 23:43:35', '', null, '测试员');
-INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-05-20 20:28:17', 'admin', '2025-04-14 15:27:10', 'admin', '2025-05-20 20:28:17', '测试');
-INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$0DjMqOb8WABfmdR4q8nWKuYqtAz1b/miABoBXmZ4V8hRDrPSmT4/a', '0', '0', '127.0.0.1', '2025-04-18 14:18:59', 'admin', '2025-04-14 21:47:43', 'admin', '2025-04-18 14:18:58', null);
+INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-07-31 21:02:18', 'admin', '2025-04-14 15:27:10', 'admin', '2025-07-31 21:02:18', '测试');
+INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$9c1WIg9Dt0Gczqp0Bln2Z.giKR8x8YRXTHZF3O72DVyx1IjCfsSUe', '0', '0', '127.0.0.1', '2025-06-25 19:56:32', 'admin', '2025-04-14 21:47:43', 'admin', '2025-06-25 19:56:31', null);
 
 -- ----------------------------
 -- Table structure for sys_user_post
