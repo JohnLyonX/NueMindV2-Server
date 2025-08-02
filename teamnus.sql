@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80040
 File Encoding         : 65001
 
-Date: 2025-08-02 20:47:51
+Date: 2025-08-02 21:23:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -87,9 +87,9 @@ CREATE TABLE `edu_courses` (
 -- ----------------------------
 -- Records of edu_courses
 -- ----------------------------
-INSERT INTO `edu_courses` VALUES ('1', 'Java面向对象编程', 'https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/image-blog-revel-top-java-tools.jpg', '<p>Java面向对象编程，体验面向对象</p>', '1900.00', '1', '2025-04-08 21:29:31', '2025-04-25 15:08:12', '梁工', '0000000075');
-INSERT INTO `edu_courses` VALUES ('2', 'C语言基础', 'https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/bVdaIUN.webp', 'C语言基础课程、适合小白', '200.00', '1', '2025-04-08 21:30:38', '2025-04-09 10:23:12', '梁工', '0000000030');
-INSERT INTO `edu_courses` VALUES ('18', '测试', 'https://img.shetu66.com/2023/06/28/1687937373741115.png', '<p>测试</p>', '111.00', '0', '2025-04-18 14:13:33', '2025-04-21 18:05:23', '韩', null);
+INSERT INTO `edu_courses` VALUES ('1', 'Java面向对象编程', 'https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/image-blog-revel-top-java-tools.jpg', '<p>Java面向对象编程，体验面向对象</p>', '1900.00', '1', '2025-04-08 21:29:31', '2025-08-02 21:07:27', '梁工', '0000000075');
+INSERT INTO `edu_courses` VALUES ('2', 'C语言基础', 'https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/bVdaIUN.webp', '<p>C语言基础课程、适合小白</p>', '200.00', '1', '2025-04-08 21:30:38', '2025-08-02 21:08:57', '梁工', '0000000030');
+INSERT INTO `edu_courses` VALUES ('18', '测试', 'https://img.shetu66.com/2023/06/28/1687937373741115.png', '<p>测试</p>', '111.00', '0', '2025-04-18 14:13:33', '2025-08-02 21:22:10', '韩', null);
 
 -- ----------------------------
 -- Table structure for edu_courses_chapter
@@ -135,12 +135,12 @@ CREATE TABLE `edu_courses_details` (
 -- ----------------------------
 -- Records of edu_courses_details
 -- ----------------------------
-INSERT INTO `edu_courses_details` VALUES ('1', '1', '8', '编写第一个Java程序', '//player.bilibili.com/player.html?isOutside=true&aid=1403684424&bvid=BV1Vr42137ht&cid=1521924445&p=1');
+INSERT INTO `edu_courses_details` VALUES ('1', '1', '8', '编写第一个Java程序', '/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1');
 INSERT INTO `edu_courses_details` VALUES ('2', '1', '9', '实现Java类继承、方法重载、重写', '//player.bilibili.com/player.html?isOutside=true&aid=114369274842923&bvid=BV1zVLcz4E2z&cid=29516304217&p=1');
-INSERT INTO `edu_courses_details` VALUES ('3', '1', '10', 'GUI程序界面', '//player.bilibili.com/player.html?isOutside=true&aid=362054300&bvid=BV1994y1r7uV&cid=1228153865&p=85');
-INSERT INTO `edu_courses_details` VALUES ('4', '1', '11', 'GUI布局管理', '');
-INSERT INTO `edu_courses_details` VALUES ('5', '2', '12', 'C语言介绍', 'https://www.youtube.com/embed/DIyj_V8h8X0');
-INSERT INTO `edu_courses_details` VALUES ('6', '2', '13', 'C语言基础语法', 'https://www.youtube.com/embed/DIyj_V8h8X0');
+INSERT INTO `edu_courses_details` VALUES ('3', '1', '10', 'GUI程序界面', '/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1');
+INSERT INTO `edu_courses_details` VALUES ('4', '1', '11', 'GUI布局管理', '/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1');
+INSERT INTO `edu_courses_details` VALUES ('5', '2', '12', 'C语言介绍', '/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1');
+INSERT INTO `edu_courses_details` VALUES ('6', '2', '13', 'C语言基础语法', '/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1');
 
 -- ----------------------------
 -- Table structure for edu_courses_exam
@@ -155,14 +155,14 @@ CREATE TABLE `edu_courses_exam` (
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '考试名称',
   `file_url` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '试卷地址',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COMMENT='课程章节考试表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COMMENT='课程章节考试表';
 
 -- ----------------------------
 -- Records of edu_courses_exam
 -- ----------------------------
 INSERT INTO `edu_courses_exam` VALUES ('1', '104', '1', 'Java面向对象编程', '3', 'Java章节测试一', '/profile/upload/2025/04/24/Java基础期末考试试卷_20250424164434A006.docx');
-INSERT INTO `edu_courses_exam` VALUES ('13', '104', null, null, null, '2332', '/profile/upload/2025/04/19/第一章考试_20250419205326A001.docx');
-INSERT INTO `edu_courses_exam` VALUES ('14', '103', null, null, null, '123', '/profile/upload/2025/04/19/第一章考试_20250419220153A002.docx');
+INSERT INTO `edu_courses_exam` VALUES ('15', null, '1', 'Java面向对象编程', null, 'java章节测试二', '/profile/upload/2025/08/02/Java基础期末考试试卷_20250802210958A001.docx');
+INSERT INTO `edu_courses_exam` VALUES ('16', null, '1', 'Java面向对象编程', null, 'java章节测试三', '/profile/upload/2025/08/02/Java基础期末考试试卷_20250802211121A003.docx');
 
 -- ----------------------------
 -- Table structure for edu_courses_exam_details
@@ -255,11 +255,12 @@ CREATE TABLE `edu_exam_filelib` (
   `courses_id` int(10) unsigned zerofill DEFAULT NULL COMMENT '课程编号',
   `score` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb3 COMMENT='考试试卷提交与修改';
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 COMMENT='考试试卷提交与修改';
 
 -- ----------------------------
 -- Records of edu_exam_filelib
 -- ----------------------------
+INSERT INTO `edu_exam_filelib` VALUES ('57', '0000000001', '张三', 'Java面向对象编程', null, null, 'Java章节测试一', '/profile/upload/2025/08/02/张三Java基础期末考试试卷_20250523170857A007 (1)_20250720201010A003_20250802211358A005.docx', null, null, '0');
 
 -- ----------------------------
 -- Table structure for edu_exam_task
@@ -299,7 +300,6 @@ CREATE TABLE `edu_exercises` (
 -- ----------------------------
 INSERT INTO `edu_exercises` VALUES ('1', '数据库基础测试', '测试数据库基础知识', '1', '2025-05-14 19:00:55', '2023-06-01 00:00:00', '30', '2');
 INSERT INTO `edu_exercises` VALUES ('2', '网络基础小测', '简单的网络知识测试', '1', '2025-05-14 19:00:55', '2023-06-10 00:00:00', '20', '1');
-INSERT INTO `edu_exercises` VALUES ('9', '1', '1', '100', '2025-05-17 00:00:00', '2025-05-17 00:00:00', '120', '0');
 
 -- ----------------------------
 -- Table structure for edu_exercises_questions
@@ -348,13 +348,14 @@ CREATE TABLE `edu_exercises_student_answers` (
   CONSTRAINT `edu_exercises_student_answers_ibfk_2` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`),
   CONSTRAINT `edu_exercises_student_answers_ibfk_3` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`),
   CONSTRAINT `edu_exercises_student_answers_chk_1` CHECK ((`selected_answer` in (_utf8mb4'A',_utf8mb4'B',_utf8mb4'C',_utf8mb4'D')))
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercises_student_answers
 -- ----------------------------
-INSERT INTO `edu_exercises_student_answers` VALUES ('62', '1', '1', '1', 'C', '0', '2025-05-20 19:51:15');
-INSERT INTO `edu_exercises_student_answers` VALUES ('63', '1', '1', '2', 'C', '1', '2025-05-20 19:51:15');
+INSERT INTO `edu_exercises_student_answers` VALUES ('71', '1', '1', '1', 'B', '1', '2025-08-02 21:20:11');
+INSERT INTO `edu_exercises_student_answers` VALUES ('72', '1', '1', '2', 'B', '0', '2025-08-02 21:20:11');
+INSERT INTO `edu_exercises_student_answers` VALUES ('73', '1', '1', '3', 'B', '0', '2025-08-02 21:20:11');
 
 -- ----------------------------
 -- Table structure for edu_exercise_questions_correlation
@@ -371,7 +372,7 @@ CREATE TABLE `edu_exercise_questions_correlation` (
   KEY `question_id` (`question_id`),
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `edu_exercises` (`exercise_id`) ON DELETE CASCADE,
   CONSTRAINT `edu_exercise_questions_correlation_ibfk_2` FOREIGN KEY (`question_id`) REFERENCES `edu_exercises_questions` (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_questions_correlation
@@ -379,8 +380,9 @@ CREATE TABLE `edu_exercise_questions_correlation` (
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('5', '2', '1', '2', '2');
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('8', '2', '2', '3', '2');
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('12', '1', '1', '1', '2');
-INSERT INTO `edu_exercise_questions_correlation` VALUES ('30', '1', '2', '2', '2');
 INSERT INTO `edu_exercise_questions_correlation` VALUES ('33', '2', '3', '1', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('35', '1', '3', '3', '2');
+INSERT INTO `edu_exercise_questions_correlation` VALUES ('36', '1', '2', '4', '2');
 
 -- ----------------------------
 -- Table structure for edu_exercise_scores
@@ -395,12 +397,12 @@ CREATE TABLE `edu_exercise_scores` (
   `completion_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`score_id`),
   UNIQUE KEY `student_id` (`student_id`,`exercise_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of edu_exercise_scores
 -- ----------------------------
-INSERT INTO `edu_exercise_scores` VALUES ('12', '1', '1', '2.00', '4', '2025-05-20 19:51:15');
+INSERT INTO `edu_exercise_scores` VALUES ('21', '1', '1', '2.00', '6', '2025-08-02 21:20:10');
 
 -- ----------------------------
 -- Table structure for edu_student
@@ -1066,7 +1068,7 @@ CREATE TABLE `sys_logininfor` (
   PRIMARY KEY (`info_id`) USING BTREE,
   KEY `idx_sys_logininfor_s` (`status`) USING BTREE,
   KEY `idx_sys_logininfor_lt` (`login_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=678 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=681 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1649,6 +1651,9 @@ INSERT INTO `sys_logininfor` VALUES ('674', '19838472634', '127.0.0.1', '内网I
 INSERT INTO `sys_logininfor` VALUES ('675', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '用户不存在/密码错误', '2025-06-25 19:56:19');
 INSERT INTO `sys_logininfor` VALUES ('676', '13345678910', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-06-25 19:56:31');
 INSERT INTO `sys_logininfor` VALUES ('677', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-07-31 21:02:18');
+INSERT INTO `sys_logininfor` VALUES ('678', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2025-08-02 21:04:34');
+INSERT INTO `sys_logininfor` VALUES ('679', 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-08-02 21:04:36');
+INSERT INTO `sys_logininfor` VALUES ('680', '19838472634', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2025-08-02 21:05:03');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1877,7 +1882,7 @@ CREATE TABLE `sys_oper_log` (
   KEY `idx_sys_oper_log_bt` (`business_type`) USING BTREE,
   KEY `idx_sys_oper_log_s` (`status`) USING BTREE,
   KEY `idx_sys_oper_log_ot` (`oper_time`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=878 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=911 DEFAULT CHARSET=utf8mb3 ROW_FORMAT=DYNAMIC COMMENT='操作日志记录';
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -2660,6 +2665,39 @@ INSERT INTO `sys_oper_log` VALUES ('874', '代码生成', '6', 'com.nuex.generat
 INSERT INTO `sys_oper_log` VALUES ('875', '代码生成', '3', 'com.nuex.generator.controller.GenController.remove()', 'DELETE', '1', 'admin', '教研学院', '/tool/gen/41', '127.0.0.1', '内网IP', '[41]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:21:34', '9');
 INSERT INTO `sys_oper_log` VALUES ('876', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"2\",\"codeAbility\":12,\"email\":\"xxxxxx@qq.com\",\"grade\":\"2025\",\"id\":3,\"major\":\"数字媒体艺术\",\"params\":{},\"school\":\"波士顿大学\",\"sex\":\"\",\"studentId\":101,\"studyAbility\":32,\"thinkingAbility\":44}],\"id\":101,\"name\":\"李四\",\"params\":{},\"phoneNumber\":\"13345678910\",\"updateTime\":\"2025-06-07 16:45:15\",\"url\":\"/profile/upload/2025/06/07/123333_20250607161903A002.jpg\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 16:45:15', '10');
 INSERT INTO `sys_oper_log` VALUES ('877', '学生基本信息', '2', 'com.nuex.edu.controller.EduStudentController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/student', '127.0.0.1', '内网IP', '{\"eduStudentDetailsList\":[{\"age\":20,\"classinfo\":\"计算机科学2班\",\"codeAbility\":80,\"createTime\":\"2025-04-08 20:51:15\",\"email\":\"test@gmail.com\",\"grade\":\"22级\",\"id\":1,\"major\":\"计算机科学\",\"params\":{},\"school\":\"清华大学\",\"sex\":\"男\",\"studentId\":1,\"studyAbility\":20,\"thinkingAbility\":60,\"updateTime\":\"2025-04-08 20:51:17\"}],\"id\":1,\"name\":\"张三\",\"params\":{},\"phoneNumber\":\"19838472634\",\"updateTime\":\"2025-06-07 17:01:04\",\"url\":\"/profile/upload/2025/06/07/aw_20250607170102A003.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-06-07 17:01:04', '11');
+INSERT INTO `sys_oper_log` VALUES ('878', '课程', '2', 'com.nuex.edu.controller.EduCoursesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/courses', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-04-08 21:29:31\",\"eduCoursesDetailsList\":[{\"coursesChapterId\":8,\"coursesChapterName\":\"编写第一个Java程序\",\"coursesId\":1,\"id\":1,\"params\":{},\"title\":\"编写第一个Java程序\",\"videoUrl\":\"/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1\"},{\"coursesChapterId\":9,\"coursesChapterName\":\"实现Java类继承、方法重载、重写\",\"coursesId\":1,\"id\":2,\"params\":{},\"title\":\"实现Java类继承、方法重载、重写\",\"videoUrl\":\"//player.bilibili.com/player.html?isOutside=true&aid=114369274842923&bvid=BV1zVLcz4E2z&cid=29516304217&p=1\"},{\"coursesChapterId\":10,\"coursesChapterName\":\"GUI程序界面\",\"coursesId\":1,\"id\":3,\"params\":{},\"title\":\"GUI程序界面\",\"videoUrl\":\"/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1\"},{\"coursesChapterId\":11,\"coursesChapterName\":\"GUI布局管理\",\"coursesId\":1,\"id\":4,\"params\":{},\"title\":\"GUI布局管理\",\"videoUrl\":\"/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1\"}],\"id\":1,\"name\":\"Java面向对象编程\",\"params\":{},\"price\":1900,\"progress\":75,\"status\":1,\"summary\":\"<p>Java面向对象编程，体验面向对象</p>\",\"teacherName\":\"梁工\",\"updateTime\":\"2025-08-02 21:07:26\",\"url\":\"https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/image-blog-revel-top-java-tools.jpg\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:07:26', '36');
+INSERT INTO `sys_oper_log` VALUES ('879', '课程', '2', 'com.nuex.edu.controller.EduCoursesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/courses', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-04-08 21:30:38\",\"eduCoursesDetailsList\":[{\"coursesChapterId\":12,\"coursesChapterName\":\"C语言介绍\",\"coursesId\":2,\"id\":5,\"params\":{},\"title\":\"C语言介绍\",\"videoUrl\":\"/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1\"},{\"coursesChapterId\":13,\"coursesChapterName\":\"C语言基础语法\",\"coursesId\":2,\"id\":6,\"params\":{},\"title\":\"C语言基础语法\",\"videoUrl\":\"/player.bilibili.com/player.html?isOutside=true&aid=114911447354329&bvid=BV1N7bUzTEvE&cid=31263228631&p=1\"}],\"id\":2,\"name\":\"C语言基础\",\"params\":{},\"price\":200,\"progress\":30,\"status\":1,\"summary\":\"<p>C语言基础课程、适合小白</p>\",\"teacherName\":\"梁工\",\"updateTime\":\"2025-08-02 21:08:56\",\"url\":\"https://nuex-edu.oss-cn-guangzhou.aliyuncs.com/couses/bVdaIUN.webp\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:08:56', '17');
+INSERT INTO `sys_oper_log` VALUES ('880', '课程考试', '3', 'com.nuex.edu.controller.EduCoursesExamController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/coursesExam/13,14', '127.0.0.1', '内网IP', '[13,14]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:09:29', '14');
+INSERT INTO `sys_oper_log` VALUES ('881', '课程考试', '1', 'com.nuex.edu.controller.EduCoursesExamController.add()', 'POST', '1', 'admin', '教研学院', '/edu/coursesExam', '127.0.0.1', '内网IP', '{\"coursesId\":1,\"coursesName\":\"Java面向对象编程\",\"fileUrl\":\"/profile/upload/2025/08/02/Java基础期末考试试卷_20250802210958A001.docx\",\"id\":15,\"name\":\"java考试二\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:09:59', '14');
+INSERT INTO `sys_oper_log` VALUES ('882', '考试试卷提交与修改', '1', 'com.nuex.edu.controller.EduExamFilelibController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/examFilelib', '127.0.0.1', '内网IP', '{\"coursesExamName\":\"java考试二\",\"coursesName\":\"Java面向对象编程\",\"id\":55,\"name\":\"张三\",\"params\":{},\"score\":0,\"studentId\":1,\"subPath\":\"/profile/upload/2025/08/02/张三Java基础期末考试试卷_20250523170857A007 (1)_20250720201010A003_20250802211025A002.docx\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:10:26', '12');
+INSERT INTO `sys_oper_log` VALUES ('883', '课程考试', '1', 'com.nuex.edu.controller.EduCoursesExamController.add()', 'POST', '1', 'admin', '教研学院', '/edu/coursesExam', '127.0.0.1', '内网IP', '{\"coursesId\":1,\"coursesName\":\"Java面向对象编程\",\"fileUrl\":\"/profile/upload/2025/08/02/Java基础期末考试试卷_20250802211121A003.docx\",\"id\":16,\"name\":\"java章节考试二\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:11:22', '7');
+INSERT INTO `sys_oper_log` VALUES ('884', '考试试卷提交与修改', '1', 'com.nuex.edu.controller.EduExamFilelibController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/examFilelib', '127.0.0.1', '内网IP', '{\"coursesExamName\":\"java章节考试二\",\"coursesName\":\"Java面向对象编程\",\"id\":56,\"name\":\"张三\",\"params\":{},\"score\":0,\"studentId\":1,\"subPath\":\"/profile/upload/2025/08/02/张三Java基础期末考试试卷_20250523170857A007 (1)_20250720201010A003_20250802211143A004.docx\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:11:43', '12');
+INSERT INTO `sys_oper_log` VALUES ('885', '课程考试', '2', 'com.nuex.edu.controller.EduCoursesExamController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/coursesExam', '127.0.0.1', '内网IP', '{\"coursesId\":1,\"coursesName\":\"Java面向对象编程\",\"fileUrl\":\"/profile/upload/2025/08/02/Java基础期末考试试卷_20250802211121A003.docx\",\"id\":16,\"name\":\"java章节测试三\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:13:13', '8');
+INSERT INTO `sys_oper_log` VALUES ('886', '课程考试', '2', 'com.nuex.edu.controller.EduCoursesExamController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/coursesExam', '127.0.0.1', '内网IP', '{\"coursesId\":1,\"coursesName\":\"Java面向对象编程\",\"fileUrl\":\"/profile/upload/2025/08/02/Java基础期末考试试卷_20250802210958A001.docx\",\"id\":15,\"name\":\"java章节测试二\",\"params\":{}}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:13:29', '7');
+INSERT INTO `sys_oper_log` VALUES ('887', '考试试卷提交与修改', '3', 'com.nuex.edu.controller.EduExamFilelibController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/examFilelib/55,56', '127.0.0.1', '内网IP', '[55,56]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:13:46', '8');
+INSERT INTO `sys_oper_log` VALUES ('888', '考试试卷提交与修改', '1', 'com.nuex.edu.controller.EduExamFilelibController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/examFilelib', '127.0.0.1', '内网IP', '{\"coursesExamName\":\"Java章节测试一\",\"coursesName\":\"Java面向对象编程\",\"id\":57,\"name\":\"张三\",\"params\":{},\"score\":0,\"studentId\":1,\"subPath\":\"/profile/upload/2025/08/02/张三Java基础期末考试试卷_20250523170857A007 (1)_20250720201010A003_20250802211358A005.docx\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:13:58', '6');
+INSERT INTO `sys_oper_log` VALUES ('889', '练习集合', '3', 'com.nuex.edu.controller.EduExercisesController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/exercises/9', '127.0.0.1', '内网IP', '[9]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:14:19', '7');
+INSERT INTO `sys_oper_log` VALUES ('890', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"params\":{},\"questionId\":1,\"questionOrder\":4,\"score\":2}', null, '1', '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\r\n### The error may exist in file [D:\\html+css\\vue3-create-vue\\123\\NueMindV2\\NueMindV2-Server\\nuex-edu\\target\\classes\\mapper\\edu\\EduExerciseQuestionsCorrelationMapper.xml]\r\n### The error may involve com.nuex.edu.mapper.EduExerciseQuestionsCorrelationMapper.insertEduExerciseQuestionsCorrelation-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into edu_exercise_questions_correlation          ( exercise_id,             question_id,             question_order,             score )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'\n; Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2-1\' for key \'edu_exercise_questions_correlation.exercise_id\'', '2025-08-02 21:15:36', '62');
+INSERT INTO `sys_oper_log` VALUES ('891', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"id\":35,\"params\":{},\"questionId\":3,\"questionOrder\":3,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:15:53', '7');
+INSERT INTO `sys_oper_log` VALUES ('892', '练习题目关联表', '3', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/correlation/30', '127.0.0.1', '内网IP', '[30]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:15:58', '6');
+INSERT INTO `sys_oper_log` VALUES ('893', '练习题目关联表', '1', 'com.nuex.edu.controller.EduExerciseQuestionsCorrelationController.add()', 'POST', '1', 'admin', '教研学院', '/edu/correlation', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"id\":36,\"params\":{},\"questionId\":2,\"questionOrder\":4,\"score\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:16:15', '7');
+INSERT INTO `sys_oper_log` VALUES ('894', '成绩表', '3', 'com.nuex.edu.controller.EduExerciseScoresController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/scores/12', '127.0.0.1', '内网IP', '[12]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:03', '7');
+INSERT INTO `sys_oper_log` VALUES ('895', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/62,63', '127.0.0.1', '内网IP', '[62,63]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:10', '8');
+INSERT INTO `sys_oper_log` VALUES ('896', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-08-02 21:18:25.949\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"A\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:18:25.949\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"A\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:18:25.949\",\"exerciseId\":1,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"A\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:26', '17');
+INSERT INTO `sys_oper_log` VALUES ('897', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:26', '5');
+INSERT INTO `sys_oper_log` VALUES ('898', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-08-02 21:18:50.48\",\"exerciseId\":2,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"B\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:18:50.48\",\"exerciseId\":2,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:18:50.48\",\"exerciseId\":2,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"B\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:50', '8');
+INSERT INTO `sys_oper_log` VALUES ('899', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":2,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:18:50', '7');
+INSERT INTO `sys_oper_log` VALUES ('900', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/65,66,67', '127.0.0.1', '内网IP', '[65,66,67]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:03', '8');
+INSERT INTO `sys_oper_log` VALUES ('901', '成绩表', '3', 'com.nuex.edu.controller.EduExerciseScoresController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/scores/15', '127.0.0.1', '内网IP', '[15]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:07', '8');
+INSERT INTO `sys_oper_log` VALUES ('902', '成绩表', '3', 'com.nuex.edu.controller.EduExerciseScoresController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/scores/18', '127.0.0.1', '内网IP', '[18]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:11', '6');
+INSERT INTO `sys_oper_log` VALUES ('903', '学生提交答案表', '3', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.remove()', 'DELETE', '1', 'admin', '教研学院', '/edu/answers/68,69,70', '127.0.0.1', '内网IP', '[68,69,70]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:15', '8');
+INSERT INTO `sys_oper_log` VALUES ('904', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-14 19:00:55\",\"description\":\"测试数据库基础知识\",\"exerciseId\":1,\"params\":{},\"status\":0,\"submissionTime\":\"2023-06-01\",\"timeLimit\":30,\"title\":\"数据库基础测试\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:36', '7');
+INSERT INTO `sys_oper_log` VALUES ('905', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-14 19:00:55\",\"description\":\"测试数据库基础知识\",\"exerciseId\":1,\"params\":{},\"status\":1,\"submissionTime\":\"2023-06-01\",\"timeLimit\":30,\"title\":\"数据库基础测试\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:53', '6');
+INSERT INTO `sys_oper_log` VALUES ('906', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/exercises', '127.0.0.1', '内网IP', '{\"createdAt\":\"2025-05-14 19:00:55\",\"description\":\"简单的网络知识测试\",\"exerciseId\":2,\"params\":{},\"status\":1,\"submissionTime\":\"2023-06-10\",\"timeLimit\":20,\"title\":\"网络基础小测\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:19:59', '7');
+INSERT INTO `sys_oper_log` VALUES ('907', '学生提交答案表', '1', 'com.nuex.edu.controller.EduExercisesStudentAnswersController.add()', 'POST', '1', '19838472634', '信息科技学院', '/edu/answers', '127.0.0.1', '内网IP', '[{\"answerTime\":\"2025-08-02 21:20:10.709\",\"exerciseId\":1,\"params\":{},\"questionId\":1,\"selectedAnswer\":\"B\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:20:10.709\",\"exerciseId\":1,\"params\":{},\"questionId\":2,\"selectedAnswer\":\"B\",\"studentId\":1},{\"answerTime\":\"2025-08-02 21:20:10.709\",\"exerciseId\":1,\"params\":{},\"questionId\":3,\"selectedAnswer\":\"B\",\"studentId\":1}]', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:20:10', '15');
+INSERT INTO `sys_oper_log` VALUES ('908', '练习集合', '2', 'com.nuex.edu.controller.EduExercisesController.edit()', 'PUT', '1', '19838472634', '信息科技学院', '/edu/exercises/', '127.0.0.1', '内网IP', '{\"exerciseId\":1,\"params\":{},\"status\":2}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:20:11', '7');
+INSERT INTO `sys_oper_log` VALUES ('909', '课程', '2', 'com.nuex.edu.controller.EduCoursesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/courses', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-04-18 14:13:33\",\"eduCoursesDetailsList\":[],\"id\":18,\"name\":\"测试\",\"params\":{},\"price\":111,\"status\":1,\"summary\":\"<p>测试</p>\",\"teacherName\":\"韩\",\"updateTime\":\"2025-08-02 21:21:54\",\"url\":\"https://img.shetu66.com/2023/06/28/1687937373741115.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:21:54', '10');
+INSERT INTO `sys_oper_log` VALUES ('910', '课程', '2', 'com.nuex.edu.controller.EduCoursesController.edit()', 'PUT', '1', 'admin', '教研学院', '/edu/courses', '127.0.0.1', '内网IP', '{\"createTime\":\"2025-04-18 14:13:33\",\"eduCoursesDetailsList\":[],\"id\":18,\"name\":\"测试\",\"params\":{},\"price\":111,\"status\":0,\"summary\":\"<p>测试</p>\",\"teacherName\":\"韩\",\"updateTime\":\"2025-08-02 21:22:09\",\"url\":\"https://img.shetu66.com/2023/06/28/1687937373741115.png\"}', '{\"msg\":\"操作成功\",\"code\":200}', '0', null, '2025-08-02 21:22:09', '17');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -2971,9 +3009,9 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-06-08 13:15:33', 'admin', '2025-04-01 23:43:35', '', '2025-06-08 13:15:33', '管理员');
+INSERT INTO `sys_user` VALUES ('1', '103', 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2025-08-02 21:04:36', 'admin', '2025-04-01 23:43:35', '', '2025-08-02 21:04:36', '管理员');
 INSERT INTO `sys_user` VALUES ('2', '105', 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2025-04-01 23:43:35', 'admin', '2025-04-01 23:43:35', '', null, '测试员');
-INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-07-31 21:02:18', 'admin', '2025-04-14 15:27:10', 'admin', '2025-07-31 21:02:18', '测试');
+INSERT INTO `sys_user` VALUES ('100', '104', '19838472634', '张三', '00', '908014915@qq.com', '19838472634', '0', '', '$2a$10$aq3.kBeUOSvAm9FUdi1ZfuOgaAr6r9/SzDaj3njN6.Y3JC0gJc4wG', '0', '0', '127.0.0.1', '2025-08-02 21:05:04', 'admin', '2025-04-14 15:27:10', 'admin', '2025-08-02 21:05:03', '测试');
 INSERT INTO `sys_user` VALUES ('101', '104', '13345678910', '梁展波', '00', 'example@nuexedu.com', '13345678910', '0', '', '$2a$10$9c1WIg9Dt0Gczqp0Bln2Z.giKR8x8YRXTHZF3O72DVyx1IjCfsSUe', '0', '0', '127.0.0.1', '2025-06-25 19:56:32', 'admin', '2025-04-14 21:47:43', 'admin', '2025-06-25 19:56:31', null);
 
 -- ----------------------------
